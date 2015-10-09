@@ -2,13 +2,28 @@
 <head>
   <title>DiningBase</title>
   <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="main.css">
   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="semantic/dist/semantic.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    // Display masthead or floating menu
+    $('.masthead').visibility({
+      once: false,
+      onBottomPassed: function() {
+        $('.fixed.menu').transition('fade in');
+      },
+      onBottomPassedReverse: function() {
+        $('.fixed.menu').transition('fade out');
+      }
+    });
+  });
+  </script>
 </head>
 
 <body>
-  <!-- Menu -->
-  <div class="ui large top hidden menu">
+  <!-- Floating Menu -->
+  <div class="ui large fixed top hidden menu">
     <div class="ui container">
       <a class="active item">Home</a>
       <a class="item" href="../projectdetails">Project</a>
@@ -23,14 +38,28 @@
     </div>
   </div>
 
-  <!-- Contents -->
   <div class="pusher">
     <div class="ui inverted vertical masthead center aligned segment">
+      <!-- Masthead menu-->
+      <div class="ui container">
+        <div class="ui large secondary inverted pointing menu">
+          <a class="active item">Home</a>
+          <a class="item" href="../projectdetails">Project</a>
+          <div class="right menu">
+            <div class="item">
+              <a class="ui inverted button">Log in</a>
+              <a class="ui inverted button">Sign up</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Masthead contents-->
       <div class="ui container">
         <div class="ui text container">
           <h1 class="ui inverted header">DiningBase</h1>
           <h2>Notre Dame's finest dining hall review service</h2>
-          <div class="ui huge primary button">Learn More</div>
+          <a class="ui huge primary button">Learn More</a>
         </div>
       </div>
     </div>
