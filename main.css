@@ -22,3 +22,7 @@
   font-size: 1.7em;
   font-weight: normal;
 }
+
+.ui.form {
+  padding: 1em 1.7em;
+}

@@ -18,6 +18,14 @@
       }
     });
   });
+
+  function showLogin() {
+    $('#loginModal').modal('show');
+  }
+
+  function showSignUp() {
+    $('#signUpModal').modal('show');
+  }
   </script>
 </head>
 
@@ -29,10 +37,10 @@
       <a class="item" href="../projectdetails">Project</a>
       <div class="right menu">
         <div class="item">
-          <a class="ui button">Log in</a>
+          <a class="ui button" onclick="showLogin()">Log in</a>
         </div>
         <div class="item">
-          <a class="ui primary button">Sign up</a>
+          <a class="ui primary button" onclick="showSignUp()">Sign up</a>
         </div>
       </div>
     </div>
@@ -47,8 +55,8 @@
           <a class="item" href="../projectdetails">Project</a>
           <div class="right menu">
             <div class="item">
-              <a class="ui inverted button">Log in</a>
-              <a class="ui inverted button">Sign up</a>
+              <a class="ui inverted button" onclick="showLogin()">Log in</a>
+              <a class="ui inverted button" onclick="showSignUp()">Sign up</a>
             </div>
           </div>
         </div>
@@ -63,6 +71,40 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="ui modal small" id="loginModal">
+    <div class="header">Log In</div>
+    <form class="ui form" method="put">
+      <div class="field">
+        <label>Email</label>
+        <input type="text" name="email">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="text" name="password">
+      </div>
+      <button type="submit" name="submit" class="ui button">Go</button>
+    </form>
+  </div>
+
+  <div class="ui modal small" id="signUpModal">
+    <div class="header">Sign Up</div>
+    <form class="ui form" method="post">
+      <div class="field">
+        <label>First Name</label>
+        <input type="text" name="first-name" placeholder="Tim">
+      </div>
+      <div class="field">
+        <label>Last Name</label>
+        <input type="text" name="last-name" placeholder="Weninger">
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="text" name="email" placeholder="tweninge@nd.edu">
+      </div>
+      <button type="submit" name="submit" class="ui button">Go</button>
+    </form>
   </div>
 </body>
 </html>
