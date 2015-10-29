@@ -4,7 +4,9 @@
   "description": "Review Notre Dame's dining halls and make recipes",
   "main": "index.html",
   "dependencies": {
+    "body-parser": "^1.14.1",
     "express": "^4.13.3",
+    "mysql": "^2.9.0",
     "semantic-ui": "^2.1.4"
   },
   "devDependencies": {},
