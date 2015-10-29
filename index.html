@@ -35,7 +35,7 @@
       });
 
       // 
-      $('#signUpForm').form(signUpValidation);
+      $('#signUpForm').form(signUpValidation, formSettings);
     });
 
     var signUpValidation = {
@@ -145,7 +145,7 @@
   <div class="ui modal small" id="loginModal">
     <div class="header">Log In</div>
     <div class="content">
-      <form class="ui form" method="put">
+      <form class="ui form">
         <div class="field">
           <label>Email</label>
           <input type="text" name="email">
@@ -164,7 +164,7 @@
   <div class="ui modal small" id="signUpModal">
     <div class="header">Sign Up</div>
     <div class="content">
-      <form class="ui form" id="signUpForm" method="post">
+      <form class="ui form" id="signUpForm">
         <div class="field">
           <label>First Name</label>
           <input type="text" name="first-name" placeholder="Tim">
