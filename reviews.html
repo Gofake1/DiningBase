@@ -1,0 +1,60 @@
+<html>
+<head>
+  <title>My Reviews</title>
+  <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="semantic/dist/semantic.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    // Display masthead or floating menu
+    $('.masthead').visibility({
+      once: false,
+      onBottomPassed: function() {
+        $('.fixed.menu').transition('fade in');
+      },
+      onBottomPassedReverse: function() {
+        $('.fixed.menu').transition('fade out');
+      }
+    });
+  });
+  </script>
+</head>
+
+<body>
+
+  <!-- Top Menu -->
+  <div class="ui fixed inverted menu">
+    <div class="ui container">
+      <div href="#" class="header item">
+        Dining Base
+      </div>
+      <a href="#" class="ui simple dropdown item">
+        Navigate <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="item">Add New Recipe</div>
+          <div class="item"></div>
+          <div class="header">Header Item</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- List of reviews -->
+  <div class="ui middle aligned selection list">
+    <div class="item">
+      <div class="content">
+        <div class="header">Perogies are gr8</div>
+        <div class="description">SDH | Perogies | 10/27/2015 | 8/10</div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="content">
+        <div class="header">This pie brings me life</div>
+	<div class="description">NDH | Pumpkin Pie | 10/26/2015 | 10/10</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
