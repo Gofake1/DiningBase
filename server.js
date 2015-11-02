@@ -5,11 +5,59 @@ var app = express();
 var router = express.Router();
 var port = 7777;
 
+var connection = mysql.createConnection({
+    host:     'localhost',
+    user:     'smike',
+    password: 'balloon',
+    database: 'smike'
+});
+connection.connect();
+
 app.use(bodyParser.json());
 
 router.get('/', function(req, res) {
     res.json({ message: 'GET successful, hello' });
 });
+
+router.route('/users')
+    // Get all users
+    .get(function(req, res) {
+
+    })
+
+    // Add new user
+    .post(function(req, res) {
+        var user = {
+            firstName: req.body.firstName,
+            lastName:  req.body.lastName,
+            netid:     req.body.netid,
+            email:     req.body.email,
+            password:  req.body.password
+        };
+        var query = connection.query('INSERT INTO users SET ?', user, function(err, result) {
+            if (err)
+                res.json({ error: err });
+            else
+                res.json({ message: 'success' });
+        });
+        console.log(query.sql);
+    });
+
+router.route('/users/:user_id')
+    // Get a user
+    .get(function(req, res) {
+        
+    })
+
+    .put(function(req, res) {
+        
+    });
+
+router.route('/reviews')
+    // Get all reviews
+    .get(function(req, res) {
+
+    });
 
 app.use('/api', router);
 app.listen(port);
