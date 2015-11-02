@@ -23,11 +23,17 @@ router.get('/', function(req, res) {
 router.route('/users')
     // Get all users
     .get(function(req, res) {
-
+        var query = connection.query('SELECT * FROM User', function(err, results) {
+            if (err)
+                res.json({ error: err });
+            else
+                res.json({ message: 'success', results: results });
+        });
     })
 
     // Add new user
     .post(function(req, res) {
+        console.log(req.body);
         var user = {
             firstName: req.body.firstName,
             lastName:  req.body.lastName,

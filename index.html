@@ -26,9 +26,6 @@
       $('#signUpForm .submit.button').api({
         url:        'http://dsg1.crc.nd.edu:7777/api/users',
         method:     'POST',
-        data:       {
-          firstName: 'David'
-        },
         beforeSend: function(settings) {
           console.log(settings.data);
           return settings;
