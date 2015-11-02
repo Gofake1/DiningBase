@@ -7,9 +7,9 @@ var port = 7777;
 
 var connection = mysql.createConnection({
     host:     'localhost',
-    user:     'smike',
-    password: 'balloon',
-    database: 'smike'
+    user:     'dwu4',
+    password: 'rare_memes00',
+    database: 'dwu4'
 });
 connection.connect();
 
