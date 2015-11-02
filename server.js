@@ -14,6 +14,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 router.get('/', function(req, res) {
     res.json({ message: 'GET successful, hello' });
@@ -34,7 +35,7 @@ router.route('/users')
             email:     req.body.email,
             password:  req.body.password
         };
-        var query = connection.query('INSERT INTO users SET ?', user, function(err, result) {
+        var query = connection.query('INSERT INTO User SET ?', user, function(err, result) {
             if (err)
                 res.json({ error: err });
             else
