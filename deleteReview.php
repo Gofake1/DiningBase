@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Review Submission</title>
+  <title>Review Processesing</title>
   <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
   <link rel="stylesheet" type="text/css" href="main.css">
   <link rel="stylesheet" type="text/css" href="../dist/components/reset.css">
@@ -27,6 +27,8 @@
   <style type="text/css">
   body {
     background-color: #FFFFFF;
+    margin-top: 3em;	
+    margin-left: 2em;
   }
   .main.container {
     margin-top: 15em;
@@ -46,7 +48,7 @@
 	border: 1px solid black;
 	border-collapse: collapse;
   }
-  table, form {
+  table {
 	margin-top: 3em;
 	margin-left: 2em;
 }
@@ -71,18 +73,34 @@
   </div>
 
 
-<form action="process.php" method="post">
-Netid: <input type = "text" name="netid" required><br>
-Dining Hall: <br> 
-<input type="radio" name="DH" value="NDH" checked> NDH<br>
-<input type="radio" name="DH" value="SDH"> SDH<br>
-Item: <input type="text" name="item" required><br>
-Rating out of 10: <input type="number" name="rating" min="0" max="10" required><br>
-Review: <input type="text" name="review"><br>
-<br>
-<input type="submit" value="Submit">
-</form>
+<?php
+//Connecting, selecting database
+$link = mysqli_connect('localhost','smike','balloon')
+        or die('Could not connect: ' . mysql_error());
+mysqli_select_db($link, 'smike') or die('Could not select database.');
 
+
+$netid=$_POST["netid"];
+$DH=$_POST["DH"];
+$item=$_POST["item"];
+$delete = "delete from Review where netID='$netid' and DiningHall='$DH' and foodName='$item'";
+
+if (mysqli_query($link,$delete)){
+	echo "Review deleted successfully. ";
+	echo "Redirecting to reviews page.";
+	//Closing connection
+	mysqli_close($link);
+	$host = $_SERVER['HTTP_HOST'];
+	$uri = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+	$page = 'reviews.php';
+
+	header("Refresh: 5; URL=http://$host$uri/$page");
+}
+else{
+	echo "Error: " . $delete . "<br>" . mysqli_error($link);
+} 
+
+?>
 
 </body>
 

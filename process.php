@@ -91,52 +91,20 @@ if(isset($_POST["review"])){
 }
 $insert = "insert into Review values ('$netid','$DH','$item',$rating,'$review')";
 if (mysqli_query($link,$insert)){
-	echo "New review created successfully.";
+	echo "New review created successfully. ";
 	echo "Redirecting to reviews page.";
-	$successful = True;
-}
-else{
-	echo "Error: " . $insert . "<br>" . mysqli_error($link);
-	$successful = False;
-} 
-//Performing SQL query
-//$query = 'select * from Review';
-//$result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
-
-//Printing results in HTML
-/*echo "<table>\n";
-        echo "\t<tr>\n";
-        echo "\t<th>User</th>\n";
-        echo "\t<th>Dining Hall</th>\n";
-        echo "\t<th>Item</th>\n";
-        echo "\t<th>Rating</th>\n";
-        echo "\t<th>Review</th>\n";
-        echo "\t</tr>\n";
-while ($tuple = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-        echo "\t<tr>\n";
-        foreach ($tuple as $col_value) {
-                echo "\t\t<td>$col_value</td>\n";
-        }
-        echo "\t</tr>\n";
-}
-echo "</table>\n";
-
-//Free resultset
-mysqli_free_result($result);
-*/
-//Closing connection
-mysqli_close($link);
-if($successful){
+	//Closing connection
+	mysqli_close($link);
 	$host = $_SERVER['HTTP_HOST'];
 	$uri = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 	$page = 'reviews.php';
 
 	header("Refresh: 5; URL=http://$host$uri/$page");
 }
-?>
+else{
+	echo "Error: " . $insert . "<br>" . mysqli_error($link);
+} 
 
-<?php
-//redirect to reviews.php
 ?>
 
 </body>
