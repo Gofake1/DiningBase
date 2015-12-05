@@ -89,7 +89,7 @@ router.route('/reviews/:name')
 
 // Present today's menu
 app.get('/today', function(req, res) {
-    res.render('today', { message: 'Hello world' });
+    res.render('today', { user: 'Spencer', message: 'Hello world' });
 });
 
 // Present user's profile
