@@ -87,11 +87,20 @@ router.route('/reviews/:name')
 
     });
 
-router.route('/today')
-    // Get today's menu
-    .get(function(req, res) {
-        res.render('today', { title: 'Today\'s Menu', message: 'Hello world' });
-    });
+// Present today's menu
+app.get('/today', function(req, res) {
+    res.render('today', { message: 'Hello world' });
+});
+
+// Present user's profile
+app.get('/user', function(req, res) {
+    res.render('user', {});
+});
+
+// Present user's reviews
+app.get('/reviews', function(req, res) {
+    res.render('reviews', {});
+});
 
 app.use('/api', router);
 app.listen(port);
