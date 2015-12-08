@@ -8,7 +8,7 @@ html
     body
         div.ui.fixed.inverted.menu
             div.ui.container
-                a.item| Today
-                a.item| Reviews
-                a.item!= user
+                a.item(href='/today')| Today
+                a.item(href='/reviews')| Reviews
+                a.item(href='/user')= user
         block content

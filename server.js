@@ -17,6 +17,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'jade');
 
+// TODO: set user based on cookies or something
+var user = 'Spencer';
+
 router.get('/', function(req, res) {
     res.json({ message: 'GET successful, hello' });
 });
@@ -80,7 +83,9 @@ router.route('/reviews/:name')
     })
 
     // Update a review
-    .put()
+    .put(function(req, res) {
+        
+    })
 
     // Add a new review
     .post(function(req, res) {
@@ -89,17 +94,17 @@ router.route('/reviews/:name')
 
 // Present today's menu
 app.get('/today', function(req, res) {
-    res.render('today', { user: 'Spencer', message: 'Hello world' });
+    res.render('today', { user: user, message: 'Hello world' });
 });
 
 // Present user's profile
 app.get('/user', function(req, res) {
-    res.render('user', {});
+    res.render('user', { user: user });
 });
 
 // Present user's reviews
 app.get('/reviews', function(req, res) {
-    res.render('reviews', {});
+    res.render('reviews', { user: user });
 });
 
 app.use('/api', router);
