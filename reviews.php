@@ -47,7 +47,7 @@
 	border-collapse: collapse;
   }
   table {
-	margin-top: 3em;
+	margin-top: 10em;
 	margin-left: 2em;
 }
   .query {
