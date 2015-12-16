@@ -1,52 +1,130 @@
 # TODO: loop through all days
-# TODO: choose dining halls
 # TODO: loop through all categories in each day's menu
-# Right now the script only retrieves data for today's Legends' appetizers 
 
 from bs4 import BeautifulSoup
-import requests
-from requests.auth import HTTPBasicAuth
 import mechanize
 import mysql.connector
 
-mech = mechanize.Browser()
+# Get data from HTML
+def getNutritionData():
+    # Find nutrition data table
+    soup = BeautifulSoup(br.response().read(), 'html.parser')
+    nutritionDataTable = soup.find('form', {'name': 'menuAdd'}).find('table')
+
+    # Get desired table rows using bgcolor (lol)
+    nutritionData = nutritionDataTable.find_all('tr', bgcolor='#e4eee5')
+
+    # Display
+    for row in nutritionData:
+        cells = row.find_all('td')
+        values = []
+        for cell in cells:
+            values.append(cell.get_text())
+        del values[12] # Remove report problem
+        del values[3] # Remove quantity
+        del values[1] # Remove allergens
+        values[0] = values[0].rstrip() # Remove newlines from name
+        print '\t'.join(values)
+
+        # Insert to MySQL
+        #add_food = 'INSERT INTO Food '
+        #cursor.execute(add_food)
+
+# Cycle thorugh categories
+def getCategories():
+    br.select_form(name='dropdowns')
+    print '* APPETIZERS / SOUPS *'
+    br.form['typesList'] = ['4']
+    br.submit()
+    br.select_form(name='dropdowns')
+    print '* DESSERTS *'
+    br.form['typesList'] = ['14']
+    br.submit()
+    br.select_form(name='dropdowns')
+    print '* *'
+    br.form['typesList'] = ['']
+    br.submit()
+    br.select_form(name='dropdowns')
+    print '* *'
+    br.form['typesList'] = ['']
+    br.submit()
+    br.select_form(name='dropdowns')
+    print '* *'
+    br.form['typesList'] = ['']
+    br.submit()
+    br.select_form(name='dropdowns')
+    print '* *'
+    br.form['typesList'] = ['']
+    br.submit()
+    br.select_form(name='dropdowns')
+    print '* *'
+    br.form['typesList'] = ['']
+    br.submit()
+    br.select_form(name='dropdowns')
+    print '* *'
+    br.form['typesList'] = ['']
+    br.submit()
+    br.select_form(name='dropdowns')
+
+# Cycle through meal periods
+def getPeriods():
+    br.select_form(name='dropdowns')
+    print '** BREAKFAST **'
+    br.form['periodsList'] = ['2'] # Breakfast
+    br.submit()
+    getNutritionData()
+    br.select_form(name='dropdowns')
+    print '** LUNCH **'
+    br.form['periodsList'] = ['4'] # Lunch
+    br.submit()
+    getNutritionData()
+    br.select_form(name='dropdowns')
+    print '** DINNER **'
+    br.form['periodsList'] = ['6'] # Dinner
+    br.submit()
+    getNutritionData()
+
+# Cycle through calendar
+def getDays():
+    pass
+
+# Init
 url = 'http://nas.nd.edu'
-auth = HTTPBasicAuth('dwu4', 'rare_memes00')
-halls = ['North', 'South']
+br = mechanize.Browser()
+br.open(url)
+br.select_form(name='loginform')
+br['j_username'] = 'dwu4'
+br['j_password'] = 'rare_memes00'
+br.submit()
+
 #cnx = mysql.connector.connect(host='localhost', user='smike', password='balloon', database='smike')
 #cursor = cnx.cursor()
 
-# Get main calendar
-calendar = requests.get(url, auth=auth)
+# Open main calendar
+#br.open(url+'/index.cfm')
 
 # Find forms for menus each day
-soup = BeautifulSoup(calendar.text, 'html.parser')
-menusPerDay = soup.find_all('form', id='viewMenu')
+#calendar = br.response()
+#soup = BeautifulSoup(calendar.text, 'html.parser')
+#menusPerDay = soup.find_all('form', id='viewMenu')
+br.open(url+'/menus.cfm')
 
-# Get a menu for NDH
-someMenu = requests.post(url+'/menus.cfm', auth=auth)
+# Get the NDH menu
+br.select_form(name='dropdowns')
+print '*** NORTH ***'
+if br.form['unitList'] == ['45']: # Legends
+    br.form['unitList'] = ['46'] # NDH
+    br.submit()
+getPeriods()
 
-# Find nutrition data table
-soup = BeautifulSoup(someMenu.text, 'html.parser')
-nutritionDataTable = soup.find('form', {'name': 'menuAdd'}).find('table')
+# Get the SDH menu
+br.select_form(name='dropdowns')
+print '*** SOUTH ***'
+if br.form['unitList'] == ['46']:
+    br.form['unitList'] = ['47'] # SDH
+    br.submit()
+    getPeriods()
 
-# Get desired table rows
-nutritionData = nutritionDataTable.find_all('tr', bgcolor='#e4eee5')
+getDays()
 
-# Display
-for row in nutritionData:
-    cells = row.find_all('td')
-    values = []
-    for cell in cells:
-        values.append(cell.get_text())
-    del values[12] # Remove report problem
-    del values[3] # Remove quantity
-    del values[1] # Remove allergens
-    values[0] = values[0].rstrip() # Remove newlines from name
-    print '\t '.join(values)
-
-    # Insert to MySQL
-    #add_food = 'INSERT INTO Food '
-    #cursor.execute(add_food)
-
-cnx.close()
+#cnx.close()
