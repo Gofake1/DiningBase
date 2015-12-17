@@ -22,11 +22,13 @@
   <link rel="stylesheet" type="text/css" href="../dist/components/segment.css">
   <link rel="stylesheet" type="text/css" href="../dist/components/dropdown.css">
   <link rel="stylesheet" type="text/css" href="../dist/components/icon.css">
+
+  <script src="tablesort.js"></script>
   
 
   <style type="text/css">
   body {
-    background-color: #acd7d0;
+    background-color: #e9ece5;
   }
   .main.container {
     margin-top: 15em;
@@ -242,7 +244,7 @@ if(isset($_POST["search"])){
 	$result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
 
 	//Printing results in HTML
-echo "<table class=\"ui collapsing table\">\n";
+echo "<table class=\"ui celled collapsing table\">\n";
         echo "\t<tr>\n";
         echo "\t<th class=\"center aligned\">Dining Hall</th>\n";
         echo "\t<th>Food</th>\n";
@@ -287,7 +289,7 @@ mysqli_close($link);
 <div class="ui raised segment">
 <h3>Search for specific food items:</h3>
 <br>
-<form action="foods.php" method="post" class="ui form">
+<form action="test.php" method="post" class="ui form">
 <label>Dining Hall</label> 
 <select name="DH" class="ui dropdown">
   <option value="">---</option>
@@ -400,6 +402,12 @@ Sodium: <input type="number" name="sod"><br>-->
 </form>
 </div>
 </div>
+
+<script>
+$(document).ready(function() {
+  $('table').tablesort();
+});
+</script>
 
 </body>
 

@@ -26,7 +26,7 @@
 
   <style type="text/css">
   body {
-    background-color: #D0EBE7;
+    background-color: #e9ece5;
   }
   .main.container {
     margin-top: 15em;
@@ -49,16 +49,35 @@
   table {
 	margin-top: 10em;
 	margin-left: 5em;
+
 }
-  .query {
+  .ui.piled.segment {
 	margin-top: 3em;
 	margin-left: 2em;
 }
-  .ui.raised.segment {
-	margin-right: 2em;
+
+.ui.button {
+        background-color: #b3c2bf;
 }
 
-echo "</div>"; 
+.ui.fixed.inverted.menu {
+        background-color: #3b3a36;
+}
+
+  .ui.raised.segment {
+	margin-right: 2em;
+  background-color: #ffffff;
+}
+
+  .ui.segment {
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+  .ui.header {
+    margin-left: 1em;
+}
+
   </style>
 
 </head>
@@ -139,8 +158,11 @@ $sfat = 0;
 $sod = 0;
 
 if (isset($_POST["DH"])) $DH = $_POST["DH"];
-echo "<div class=\"query\">\n";
-echo "<br><h3>Meal:</h3>";
+
+echo "<div class=\"ui grid\">
+<div class=\"six wide centered column\">
+<div class=\"ui piled segment\">";
+echo "<h3 class=\"ui header\">Meal:</h3>";
 if (isset($_POST["item1"])) $item1 = $_POST["item1"];
 
 if($item1 != ""){     
@@ -210,8 +232,11 @@ if($item10 != ""){
 	$portion10 = $_POST["portion10"];
 	$serve10 = $_POST["serve10"];
         $query = $query . "(DiningHall='$DH' and name='$item10' and portionSize='$portion10') or ";
-        echo "<p>$item10\t$portion10\tx$serve10\n</p>";
+        echo "<p>$item10\t$portion10\tx$serve10\n</p>
+        </div>";
 }
+
+echo "</div></div></div>";
 
 $query = substr($query,0,-4);
 
@@ -219,7 +244,10 @@ if (strlen($query) > 25){
   $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
 
         //Printing results in HTML
-echo "<br><h3>Individual Nutrition:</h3>\n";
+//echo "<br><div class=\"ui segment\">";
+echo "<br><h3 class=\"ui header\">Individual Nutrition:</h3>\n";
+echo "<div class=\"ui grid\">
+<div class=\"fourteen wide centered column\">";
 echo "<table class=\"ui striped table\">\n";
         echo "\t<tr>\n";
         echo "\t<th>Dining Hall</th>\n";
@@ -266,7 +294,9 @@ while ($tuple = mysqli_fetch_array($result, MYSQL_ASSOC)) {
 echo "</table>";
 }
 
-echo "<br><h3>Total Nutrition:</h3>\n";
+echo "</div></div>";
+
+echo "<br><h3 class=\"ui header\">Total Nutrition:</h3>\n";
 echo "<div class=\"ui raised segment\">";
 echo "<div class=\"ui eight statistics\">";
 echo "<div class=\"red statistic\"><div class=\"value\">$cal</div>";
@@ -285,8 +315,7 @@ echo "<div class=\"blue statistic\"><div class=\"value\">$sfat </div>";
 echo "<div class=\"label\">Sat. Fat</div></div>";
 echo "<div class=\"violet statistic\"><div class=\"value\">$sod </div>";
 echo "<div class=\"label\">Sodium</div></div>";
-echo "</div>";
-echo "</div>";
+echo "</div></div>";
 ?>
 </body>
 

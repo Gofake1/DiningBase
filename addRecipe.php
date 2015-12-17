@@ -29,7 +29,7 @@
 
   <style type="text/css">
   body {
-    background-color: #acd7d0;
+    background-color: #e9ece5;
   }
   .main.container {
     margin-top: 15em;
@@ -54,12 +54,20 @@
         margin-left: 2em;
 }
   .query {
-        margin-top: 3em;
-        margin-left: 2em;
+    margin-top: 2em;
+        
 }
-  .ui.raised.segment {
-        padding: 5em 5em 5em 5em;
+  .ui.dropdown {
+              
 }
+  .ui.fixed.inverted.menu {
+        background-color: #3b3a36;
+}
+
+.ui.button {
+        background-color: #b3c2bf;
+}
+
   </style>
 
 </head>
@@ -103,9 +111,9 @@ if( $round == "0" ){
 
 echo "<br><br><div class=\"query\">\n";
 echo "<div class=\"ui grid\" ng-controller=\"MainCtrl\">
-<div class=\"eight wide centered column\">";
-echo "<h4 >Choose a Dining Hall:</h4>\n";
+<div class=\"six wide centered column\">";
 echo "<form action=\"addRecipe.php\" method=\"post\" class=\"ui form ui form segment\">\n";
+echo "<h3 class=\"ui dividing header\">Choose a Dining Hall:</h3>\n\n";
 echo "<div class=\"field\">
   <div class=\" ui selection dropdown\">
   <input type=\"hidden\" name=\"DH\">
@@ -141,8 +149,10 @@ $link = mysqli_connect('localhost','smike','balloon')
 mysqli_select_db($link, 'smike') or die('Could not select database.');
 $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
 echo "<br><br><div class=\"query\">\n";
-echo "<h3>Choose the items you ate:</h3>\n<br>\n";
-echo "<form action=\"addRecipe.php\" method=\"post\" class=\"ui form\">";
+echo "<div class=\"ui grid\" ng-controller=\"MainCtrl\">
+<div class=\"six wide centered column\">";
+echo "<form action=\"addRecipe.php\" method=\"post\" class=\"ui form ui form segment\">";
+echo "<h3 class=\"ui dividing header\">Choose the items you ate:</h3>\n<br>\n";
 echo "Item #1:  <select name=\"item1\" class=\"ui search selection dropdown\">
 <option value=\"\">---</option>\n";
 while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
@@ -225,7 +235,7 @@ echo "</select><br><br><br>\n";
 echo "<input type=\"hidden\" name=\"round\" value=\"2\">";
 echo "<input type=\"hidden\" name=\"DH\" value='$DH'>";
 echo "<input type=\"submit\" value=\"Next Step\" class=\"ui button\">";
-echo "</div>";
+echo "</div></div></div>";
 
 mysqli_free_result($result);
 mysqli_close($link);
@@ -249,8 +259,10 @@ $link = mysqli_connect('localhost','smike','balloon')
 mysqli_select_db($link, 'smike') or die('Could not select database.');
 
 echo "<br><br><div class=\"query\">\n";
-echo "<h3>Choose the portion sizes and number of servings:</h3>\n<br>\n";
-echo "<form action=\"recipeResults.php\" method=\"post\" class=\"ui form\">\n";
+echo "<div class=\"ui grid\" ng-controller=\"MainCtrl\">
+<div class=\"six wide centered column\">";
+echo "<form action=\"recipeResults.php\" method=\"post\" class=\"ui form ui form segment\">\n";
+echo "<h3 class=\"ui dividing header\">Choose the portion sizes and number of servings:</h3>\n<br>\n";
 if($item1 != ""){
         $query = "select portionSize from Food where name='$item1' and DiningHall='$DH'";
         $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
@@ -412,8 +424,8 @@ echo "<input type=\"hidden\" name=\"item7\" value='$item7'>";
 echo "<input type=\"hidden\" name=\"item8\" value='$item8'>";
 echo "<input type=\"hidden\" name=\"item9\" value='$item9'>";
 echo "<input type=\"hidden\" name=\"item10\" value='$item10'>";
-echo "<input type=\"submit\">";
-echo "</div>";
+echo "<input type=\"submit\" class = \"ui button\">";
+echo "</div></div></div>";
 }
 ?>
 
