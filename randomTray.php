@@ -124,7 +124,7 @@ else if ($round == "1") {
   mysqli_select_db($link, 'smike') or die('Could not select database');
 
   echo "<br><br>
-  <table class=\"ui celled table\">
+  <table class=\"ui celled collapsing table\">
     <tbody>
       <thead>
         <tr>
