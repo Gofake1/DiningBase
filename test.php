@@ -1,5 +1,4 @@
-<html>
-<head>
+d>
   <!-- Standard Meta -->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -29,7 +28,7 @@
 
   <style type="text/css">
   body {
-    background-color: #acd7d0;
+    background-color: #f2efe8;
   }
   .main.container {
     margin-top: 15em;
@@ -59,6 +58,9 @@
 }
   .ui.raised.segment {
         padding: 5em 5em 5em 5em;
+}
+  .ui.fixed.inverted.menu {
+        background-color: #b0aac2;
 }
   </style>
 
@@ -104,8 +106,8 @@ if( $round == "0" ){
 echo "<br><br><div class=\"query\">\n";
 echo "<div class=\"ui grid\" ng-controller=\"MainCtrl\">
 <div class=\"eight wide centered column\">";
-echo "<h4 >Choose a Dining Hall:</h4>\n";
-echo "<form action=\"addRecipe.php\" method=\"post\" class=\"ui form ui form segment\">\n";
+echo "<h4>Choose a Dining Hall:</h4>\n";
+echo "<form action=\"test.php\" method=\"post\" class=\"ui form ui form segment\">\n";
 echo "<div class=\"field\">
   <div class=\" ui selection dropdown\">
   <input type=\"hidden\" name=\"DH\">
@@ -141,8 +143,10 @@ $link = mysqli_connect('localhost','smike','balloon')
 mysqli_select_db($link, 'smike') or die('Could not select database.');
 $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
 echo "<br><br><div class=\"query\">\n";
+echo "<div class=\"ui grid\" ng-controller=\"MainCtrl\">
+<div class=\"eight wide centered column\">";
 echo "<h3>Choose the items you ate:</h3>\n<br>\n";
-echo "<form action=\"addRecipe.php\" method=\"post\" class=\"ui form\">";
+echo "<form action=\"test.php\" method=\"post\" class=\"ui form ui form segment\">";
 echo "Item #1:  <select name=\"item1\" class=\"ui search selection dropdown\">
 <option value=\"\">---</option>\n";
 while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
@@ -225,7 +229,7 @@ echo "</select><br><br><br>\n";
 echo "<input type=\"hidden\" name=\"round\" value=\"2\">";
 echo "<input type=\"hidden\" name=\"DH\" value='$DH'>";
 echo "<input type=\"submit\" value=\"Next Step\" class=\"ui button\">";
-echo "</div>";
+echo "</div></div></div>";
 
 mysqli_free_result($result);
 mysqli_close($link);
@@ -233,24 +237,26 @@ mysqli_close($link);
 
 else if($round = "2"){
 if(isset($_POST["DH"])) $DH = $_POST["DH"];
-if(isset($_POST["item1"])) $item1 = mysql_real_escape_string($_POST["item1"]);
-if(isset($_POST["item2"])) $item2 = mysql_real_escape_string($_POST["item2"]);
-if(isset($_POST["item3"])) $item3 = mysql_real_escape_string($_POST["item3"]);
-if(isset($_POST["item4"])) $item4 = mysql_real_escape_string($_POST["item4"]);
-if(isset($_POST["item5"])) $item5 = mysql_real_escape_string($_POST["item5"]);
-if(isset($_POST["item6"])) $item6 = mysql_real_escape_string($_POST["item6"]);
-if(isset($_POST["item7"])) $item7 = mysql_real_escape_string($_POST["item7"]);
-if(isset($_POST["item8"])) $item8 = mysql_real_escape_string($_POST["item8"]);
-if(isset($_POST["item9"])) $item9 = mysql_real_escape_string($_POST["item9"]);
-if(isset($_POST["item10"])) $item10 = mysql_real_escape_string($_POST["item10"]);
+if(isset($_POST["item1"])) $item1 = $_POST["item1"];
+if(isset($_POST["item2"])) $item2 = $_POST["item2"];
+if(isset($_POST["item3"])) $item3 = $_POST["item3"];
+if(isset($_POST["item4"])) $item4 = $_POST["item4"];
+if(isset($_POST["item5"])) $item5 = $_POST["item5"];
+if(isset($_POST["item6"])) $item6 = $_POST["item6"];
+if(isset($_POST["item7"])) $item7 = $_POST["item7"];
+if(isset($_POST["item8"])) $item8 = $_POST["item8"];
+if(isset($_POST["item9"])) $item9 = $_POST["item9"];
+if(isset($_POST["item10"])) $item10 = $_POST["item10"];
 
 $link = mysqli_connect('localhost','smike','balloon')
    or die('Could not connect: ' . mysql_error());
 mysqli_select_db($link, 'smike') or die('Could not select database.');
 
 echo "<br><br><div class=\"query\">\n";
+echo "<div class=\"ui grid\" ng-controller=\"MainCtrl\">
+<div class=\"eight wide centered column\">";
 echo "<h3>Choose the portion sizes and number of servings:</h3>\n<br>\n";
-echo "<form action=\"recipeResults.php\" method=\"post\" class=\"ui form\">\n";
+echo "<form action=\"recipeResults.php\" method=\"post\" class=\"ui form ui form segment\">\n";
 if($item1 != ""){
         $query = "select portionSize from Food where name='$item1' and DiningHall='$DH'";
         $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
@@ -262,7 +268,7 @@ if($item1 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve1\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve1\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -277,7 +283,7 @@ if($item2 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve2\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve2\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -292,7 +298,7 @@ if($item3 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve3\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve3\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -307,7 +313,7 @@ if($item4 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve4\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve4\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -322,7 +328,7 @@ if($item5 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve5\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve5\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -337,7 +343,7 @@ if($item6 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve6\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve6\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -352,7 +358,7 @@ if($item7 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve7\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve7\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -367,7 +373,7 @@ if($item8 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve8\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve8\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -382,7 +388,7 @@ if($item9 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve9\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve9\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -397,7 +403,7 @@ if($item10 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve10\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve10\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 mysqli_close($link);
@@ -412,8 +418,8 @@ echo "<input type=\"hidden\" name=\"item7\" value='$item7'>";
 echo "<input type=\"hidden\" name=\"item8\" value='$item8'>";
 echo "<input type=\"hidden\" name=\"item9\" value='$item9'>";
 echo "<input type=\"hidden\" name=\"item10\" value='$item10'>";
-echo "<input type=\"submit\">";
-echo "</div>";
+echo "<input type=\"submit\" class = \"ui button\">";
+echo "</div></div></div>";
 }
 ?>
 
@@ -497,4 +503,5 @@ echo "</div>";
 </body>
 
 </html>
+
 
