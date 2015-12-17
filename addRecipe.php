@@ -32,19 +32,19 @@
     padding: 5em 0em;
   }
   table, th, td{
-        border: 1px solid black;
-        border-collapse: collapse;
+    border: 1px solid black;
+    border-collapse: collapse;
   }
   table {
-        margin-top: 10em;
-        margin-left: 2em;
+    margin-top: 10em;
+    margin-left: 2em;
   }
   .query {
-        margin-top: 3em;
-        margin-left: 2em;
+    margin-top: 3em;
+    margin-left: 2em;
   }
   .ui.raised.segment {
-        padding: 5em 5em 5em 5em;
+    padding: 5em 5em 5em 5em;
   }
   </style>
 
@@ -60,7 +60,8 @@
       </a>
       <a href="./foods.php" class="item">Search for Food</a>
       <a href="./addRecipe.php" class="item">Create Tray</a>
-<!--      <a href="#" class="ui simple dropdown item">
+      <a href="./randomTray.php" class="item">Feed Me</a>
+      <!--<a href="#" class="ui simple dropdown item">
         Navigate <i class="dropdown icon"></i>
         <div class="menu">
           <div class="item">Add New Recipe</div>
