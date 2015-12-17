@@ -122,9 +122,6 @@ else if ($round == "1") {
   $link = mysqli_connect('localhost', 'smike', 'balloon')
           or die('Could not connect: ' . mysql_error());
   mysqli_select_db($link, 'smike') or die('Could not select database');
-  $result = mysqli_query($link, $query) 
-            or die('Query failed: ' . mysql_error());
-  $tuple = mysqli_fetch_array($result, MYSQL_ASSOC)
 
   echo "<br><br>
   <table class=\"ui celled table\">
@@ -138,7 +135,7 @@ else if ($round == "1") {
   while ($calories < $target) {
     $result = mysqli_query($link, $query) 
               or die('Query failed: ' . mysql_error());
-    $tuple = mysqli_fetch_array($result, MYSQL_ASSOC)
+    $tuple = mysqli_fetch_array($result, MYSQL_ASSOC);
 
     $name = $tuple["name"];
     $cals = $tuple["Calories"];
