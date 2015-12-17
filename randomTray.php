@@ -13,9 +13,7 @@
 
   <style type="text/css">
   body {
-    background-color: #FFFFFF;
-    margin-top: 3em;  
-    margin-left: 2em;
+    background-color: #acd7d0;
   }
   .main.container {
     margin-top: 15em;
@@ -32,12 +30,19 @@
     padding: 5em 0em;
   }
   table, th, td{
-    border: 1px solid black;
-    border-collapse: collapse;
+        border: 1px solid black;
+        border-collapse: collapse;
   }
   table {
-    margin-top: 3em;
-    margin-left: 2em;
+        margin-top: 10em;
+        margin-left: 2em;
+  }
+  .query {
+        margin-top: 3em;
+        margin-left: 2em;
+  }
+  .ui.raised.segment {
+        padding: 5em 5em 5em 5em;
   }
   </style>
 
