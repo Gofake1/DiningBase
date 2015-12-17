@@ -126,7 +126,7 @@ else if ($round == "1") {
             or die('Query failed: ' . mysql_error());
 
   echo "<br><br>
-  <div class=\"ui celled table\">
+  <table class=\"ui celled table\">
     <tbody>";
   while ($tuple = mysqli_fetch_array($result, MYSQL_ASSOC)) {
     $name = $tuple["name"];
@@ -137,7 +137,7 @@ else if ($round == "1") {
     </tr>";
   }
   echo "  </tbody>
-  </div>";
+  </table>";
 }
 ?>
 
