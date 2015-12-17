@@ -220,16 +220,16 @@ mysqli_close($link);
 
 else if($round = "2"){
 if(isset($_POST["DH"])) $DH = $_POST["DH"];
-if(isset($_POST["item1"])) $item1 = mysqli_real_escape_string($_POST["item1"]);
-if(isset($_POST["item2"])) $item2 = mysqli_real_escape_string($_POST["item2"]);
-if(isset($_POST["item3"])) $item3 = mysqli_real_escape_string($_POST["item3"]);
-if(isset($_POST["item4"])) $item4 = mysqli_real_escape_string($_POST["item4"]);
-if(isset($_POST["item5"])) $item5 = mysqli_real_escape_string($_POST["item5"]);
-if(isset($_POST["item6"])) $item6 = mysqli_real_escape_string($_POST["item6"]);
-if(isset($_POST["item7"])) $item7 = mysqli_real_escape_string($_POST["item7"]);
-if(isset($_POST["item8"])) $item8 = mysqli_real_escape_string($_POST["item8"]);
-if(isset($_POST["item9"])) $item9 = mysqli_real_escape_string($_POST["item9"]);
-if(isset($_POST["item10"])) $item10 = mysqli_real_escape_string($_POST["item10"]);
+if(isset($_POST["item1"])) $item1 = mysqli_real_escape_string($link, $_POST["item1"]);
+if(isset($_POST["item2"])) $item2 = mysqli_real_escape_string($link, $_POST["item2"]);
+if(isset($_POST["item3"])) $item3 = mysqli_real_escape_string($link, $_POST["item3"]);
+if(isset($_POST["item4"])) $item4 = mysqli_real_escape_string($link, $_POST["item4"]);
+if(isset($_POST["item5"])) $item5 = mysqli_real_escape_string($link, $_POST["item5"]);
+if(isset($_POST["item6"])) $item6 = mysqli_real_escape_string($link, $_POST["item6"]);
+if(isset($_POST["item7"])) $item7 = mysqli_real_escape_string($link, $_POST["item7"]);
+if(isset($_POST["item8"])) $item8 = mysqli_real_escape_string($link, $_POST["item8"]);
+if(isset($_POST["item9"])) $item9 = mysqli_real_escape_string($link, $_POST["item9"]);
+if(isset($_POST["item10"])) $item10 = mysqli_real_escape_string($link, $_POST["item10"]);
 
 $link = mysqli_connect('localhost','smike','balloon')
    or die('Could not connect: ' . mysql_error());
