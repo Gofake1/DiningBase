@@ -96,7 +96,7 @@ if ($round == "0") {
     <div class=\"ui grid\" ng-controller=\"MainCtrl\">
       <div class=\"eight wide centered column\">
         <form action=\"randomTray.php\" method=\"post\" class=\"ui form ui form segment\">
-          <h4>Choose a Calorie Target:</h4>
+          <h3>Choose a Calorie Target:</h3>
           <div class=\"field\">
            <!-- <div class=\"ui selection dropdown\">
               <input type=\"hidden\" name=\"target\">

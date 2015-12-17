@@ -296,7 +296,7 @@ mysqli_close($link);
 <div class="ui raised segment">
 <h3>Search for specific food items:</h3>
 <br>
-<form action="test.php" method="post" class="ui form">
+<form action="foods.php" method="post" class="ui form">
 <label>Dining Hall</label> 
 <div class="field">
   <select name="DH" class="ui dropdown">
