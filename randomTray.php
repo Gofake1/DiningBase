@@ -95,14 +95,25 @@ if ($round == "0") {
               <div class=\"default text\">---</div>
               <i class=\"dropdown icon\"></i>
               <div class=\"menu\">
-                <div class=\"item\" data-value=\"North Dining Hall\">NDH</div>
-                <div class=\"item\" data-value=\"South Dining Hall\">SDH</div>
+                <div class=\"item\" data-value=\"300\">300</div>
+                <div class=\"item\" data-value=\"400\">400</div>
+                <div class=\"item\" data-value=\"500\">500</div>
+                <div class=\"item\" data-value=\"600\">400</div>
+                <div class=\"item\" data-value=\"700\">700</div>
               </div>
             </div>
           </div>
+          <br><br>
+          <input type=\"hidden\" name=\"round\" value=\"1\">
+          <input type=\"submit\" value=\"Next Step\" class=\"ui button\">
         </form>
       </div>
-    </div>";
+    </div>
+  </div>";
+}
+
+else if ($round == "1") {
+  echo "Hello world";
 }
 ?>
 

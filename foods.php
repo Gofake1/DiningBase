@@ -76,6 +76,7 @@
       </a>
       <a href="./foods.php" class="item">Search for Food</a>
       <a href="./addRecipe.php" class="item">Create Tray</a>
+      <a href="./randomTray.php" class="item">Feed Me</a>
 <!--      <a href="#" class="ui simple dropdown item">
         Navigate <i class="dropdown icon"></i>
         <div class="menu">
