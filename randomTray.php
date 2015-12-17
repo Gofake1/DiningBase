@@ -10,6 +10,7 @@
   <link rel="stylesheet" type="text/css" href="main.css">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
 
   <style type="text/css">
   body {
