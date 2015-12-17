@@ -124,17 +124,26 @@ else if ($round == "1") {
   mysqli_select_db($link, 'smike') or die('Could not select database');
   $result = mysqli_query($link, $query) 
             or die('Query failed: ' . mysql_error());
+  $tuple = mysqli_fetch_array($result, MYSQL_ASSOC)
 
   echo "<br><br>
   <table class=\"ui celled table\">
     <tbody>
       <thead>
-        <tr>Name</tr>
-        <tr>Calories</tr>
+        <tr>
+          <th>Name</th>
+          <th>Calories</th>
+        </tr>
       </thead>";
-  while ($tuple = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+  while ($calories < $target) {
+    $result = mysqli_query($link, $query) 
+              or die('Query failed: ' . mysql_error());
+    $tuple = mysqli_fetch_array($result, MYSQL_ASSOC)
+
     $name = $tuple["name"];
     $cals = $tuple["Calories"];
+    $calories += $cals;
+
     echo "<tr>
       <td>$name</td>
       <td>$cals</td>
