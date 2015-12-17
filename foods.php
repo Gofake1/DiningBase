@@ -22,13 +22,11 @@
   <link rel="stylesheet" type="text/css" href="../dist/components/segment.css">
   <link rel="stylesheet" type="text/css" href="../dist/components/dropdown.css">
   <link rel="stylesheet" type="text/css" href="../dist/components/icon.css">
-
-  <script src="tablesort.js"></script>
   
 
   <style type="text/css">
   body {
-    background-color: #e9ece5;
+    background-color: #e3e3e3;
   }
   .main.container {
     margin-top: 15em;
@@ -63,6 +61,11 @@
 	margin-left: 4em;
 	margin-right: 10em;
 }
+
+.ui.button {
+        background-color: #c9c9c9;
+}
+
   
   </style>
 
@@ -96,6 +99,9 @@
       </div>-->
     </div>
   </div>
+
+<div class="ui grid">
+  <div class="fourteen wide centered column">
 
 <?php
 //Connecting, selecting database
@@ -292,11 +298,13 @@ mysqli_close($link);
 <br>
 <form action="test.php" method="post" class="ui form">
 <label>Dining Hall</label> 
-<select name="DH" class="ui dropdown">
-  <option value="">---</option>
-  <option value="North Dining Hall">NDH</option>
-  <option value="South Dining Hall">SDH</option>
-</select>
+<div class="field">
+  <select name="DH" class="ui dropdown">
+    <option value="">---</option>
+    <option value="North Dining Hall">NDH</option>
+    <option value="South Dining Hall">SDH</option>
+  </select>
+</div>
 <div class="field">
  <label>Item Name</label>
  <input type="text" name="item">
@@ -399,17 +407,16 @@ Cholesterol: <input type="number" name="chol"><br>
 Saturated Fat: <input type="number" name="sfat"><br>
 Sodium: <input type="number" name="sod"><br>-->
 <input type="hidden" name="search" value="">
-<input type="submit">
+<input type="submit" class="ui button">
 </form>
 </div>
 </div>
 
 <script>
-$(document).ready(function() {
-  $('table').tablesort();
-});
+  $('.ui.dropdown').dropdown();
 </script>
 
+</div></div>
 </body>
 
 </html>

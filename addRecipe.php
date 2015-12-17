@@ -15,7 +15,7 @@
 
   <style type="text/css">
   body {
-    background-color: #e9ece5;
+    background-color: #e3e3e3;
   }
   .main.container {
     margin-top: 15em;
@@ -46,13 +46,11 @@
   .ui.dropdown {
               
 }
-  .ui.fixed.inverted.menu {
-        background-color: #3b3a36;
-}
 
 .ui.button {
-        background-color: #b3c2bf;
+        background-color: #c9c9c9;
 }
+
   .ui.raised.segment {
     padding: 5em 5em 5em 5em;
   }

@@ -26,7 +26,7 @@
 
   <style type="text/css">
   body {
-    background-color: #e9ece5;
+    background-color: #e3e3e3;
   }
   .main.container {
     margin-top: 15em;
@@ -57,11 +57,7 @@
 }
 
 .ui.button {
-        background-color: #b3c2bf;
-}
-
-.ui.fixed.inverted.menu {
-        background-color: #3b3a36;
+        background-color: #c9c9c9;
 }
 
   .ui.raised.segment {
@@ -92,6 +88,7 @@
       </a>
       <a href="./foods.php" class="item">Search for Food</a>
       <a href="./addRecipe.php" class="item">Create Tray</a>
+      <a href="./randomTray.php" class="item">Feed Me</a>
 <!--      <a href="#" class="ui simple dropdown item">
         Navigate <i class="dropdown icon"></i>
         <div class="menu">
