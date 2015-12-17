@@ -125,7 +125,7 @@ else if ($round == "1") {
   echo "<br><br>
   <div class=\"ui grid\">
     <div class=\"six wide centered column\">
-      <table class=\"ui celled collapsing table\">
+      <table class=\"ui celled table\">
         <tbody>
           <thead>
             <tr>
@@ -156,7 +156,7 @@ else if ($round == "1") {
   }
   echo "      </tbody>
       </table>
-      <h4>$calories</h4>
+      <h3>Total: $calories Calories</h4>
     </div>
   </div>";
 }
