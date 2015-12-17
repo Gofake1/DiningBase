@@ -121,7 +121,7 @@ $sfat2 = "";
 $sod2 = "";
 //Performing SQL query
 if(isset($_POST["DH"]))  $DH=$_POST["DH"];
-if(isset($_POST["item"]))  $item=mysql_real_escape_string($_POST["item"]);
+if(isset($_POST["item"]))  $item=mysqli_real_escape_string($link,$_POST["item"]);
 if(isset($_POST["cal"]))  $cal=$_POST["cal"];
 if(isset($_POST["fat"]))  $fat=$_POST["fat"];
 if(isset($_POST["pro"]))  $pro=$_POST["pro"];

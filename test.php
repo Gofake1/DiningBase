@@ -28,7 +28,7 @@ d>
 
   <style type="text/css">
   body {
-    background-color: #f2efe8;
+    background-color: #e9ece5;
   }
   .main.container {
     margin-top: 15em;
@@ -53,15 +53,20 @@ d>
         margin-left: 2em;
 }
   .query {
-        margin-top: 3em;
-        margin-left: 2em;
+    margin-top: 2em;
+        
 }
-  .ui.raised.segment {
-        padding: 5em 5em 5em 5em;
+  .ui.dropdown {
+              
 }
   .ui.fixed.inverted.menu {
-        background-color: #b0aac2;
+        background-color: #3b3a36;
 }
+
+.ui.button {
+        background-color: #b3c2bf;
+}
+
   </style>
 
 </head>
@@ -105,9 +110,9 @@ if( $round == "0" ){
 
 echo "<br><br><div class=\"query\">\n";
 echo "<div class=\"ui grid\" ng-controller=\"MainCtrl\">
-<div class=\"eight wide centered column\">";
-echo "<h4>Choose a Dining Hall:</h4>\n";
+<div class=\"six wide centered column\">";
 echo "<form action=\"test.php\" method=\"post\" class=\"ui form ui form segment\">\n";
+echo "<h3>Choose a Dining Hall:</h3>\n\n";
 echo "<div class=\"field\">
   <div class=\" ui selection dropdown\">
   <input type=\"hidden\" name=\"DH\">
@@ -144,9 +149,9 @@ mysqli_select_db($link, 'smike') or die('Could not select database.');
 $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
 echo "<br><br><div class=\"query\">\n";
 echo "<div class=\"ui grid\" ng-controller=\"MainCtrl\">
-<div class=\"eight wide centered column\">";
-echo "<h3>Choose the items you ate:</h3>\n<br>\n";
+<div class=\"six wide centered column\">";
 echo "<form action=\"test.php\" method=\"post\" class=\"ui form ui form segment\">";
+echo "<h3>Choose the items you ate:</h3>\n<br>\n";
 echo "Item #1:  <select name=\"item1\" class=\"ui search selection dropdown\">
 <option value=\"\">---</option>\n";
 while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
@@ -254,9 +259,9 @@ mysqli_select_db($link, 'smike') or die('Could not select database.');
 
 echo "<br><br><div class=\"query\">\n";
 echo "<div class=\"ui grid\" ng-controller=\"MainCtrl\">
-<div class=\"eight wide centered column\">";
+<div class=\"six wide centered column\">";
+echo "<form action=\"test2.php\" method=\"post\" class=\"ui form ui form segment\">\n";
 echo "<h3>Choose the portion sizes and number of servings:</h3>\n<br>\n";
-echo "<form action=\"recipeResults.php\" method=\"post\" class=\"ui form ui form segment\">\n";
 if($item1 != ""){
         $query = "select portionSize from Food where name='$item1' and DiningHall='$DH'";
         $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
