@@ -124,7 +124,10 @@ else if ($round == "1") {
   mysqli_select_db($link, 'smike') or die('Could not select database');
   $result = mysqli_query($link, $query) 
             or die('Query failed: ' . mysql_error());
-  echo "$result";
+  while ($tuple = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+    $name = $tuple["name"];
+    echo "<p>$name</p>";
+  }
 }
 ?>
 
