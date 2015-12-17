@@ -116,7 +116,15 @@ else if ($round == "1") {
   if (isset($_POST["target"])) {
     $target = $_POST["target"];
   }
-  echo "'$target'";
+  $meal = [];
+  $calories = 0;
+  $query = "SELECT * FROM Food ORDER BY RAND() LIMIT 1";
+  $link = mysqli_connect('localhost', 'smike', 'balloon')
+          or die('Could not connect: ' . mysql_error());
+  mysql_select_db($link, 'smike') or die('Could not select database');
+  $result = mysqli_query($link, $query) 
+            or die('Query failed: ' . mysql_error());
+  echo "$result";
 }
 ?>
 
