@@ -31,7 +31,7 @@
     padding: 5em 0em;
   }
   table, th, td{
-    border: 1px solid black;
+    border: 1px;
     border-collapse: collapse;
   }
   table {
@@ -123,14 +123,16 @@ else if ($round == "1") {
   mysqli_select_db($link, 'smike') or die('Could not select database');
 
   echo "<br><br>
-  <table class=\"ui celled collapsing table\">
-    <tbody>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Calories</th>
-        </tr>
-      </thead>";
+  <div class=\"ui grid\">
+    <div class=\"ui six wide centered column\">
+      <table class=\"ui celled collapsing table\">
+        <tbody>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Calories</th>
+            </tr>
+          </thead>";
 
   while (($target - $calories) < $target*1.05 &&
          ($target - $calories) > $target*0.95) {
@@ -138,8 +140,7 @@ else if ($round == "1") {
               or die('Query failed: ' . mysql_error());
     $tuple = mysqli_fetch_array($result, MYSQL_ASSOC);
 
-    if ($tuple["Calories"] < ($target - $calories)*1.05 ||
-        $tuple["Calories"] > ($target - $calories)*0.95) {
+    if ($tuple["Calories"] < ($target*1.05 - $calories)) {
       $name = $tuple["name"];
       $cals = $tuple["Calories"];
       $calories += $cals;
@@ -150,8 +151,10 @@ else if ($round == "1") {
       </tr>";
     }
   }
-  echo "  </tbody>
-  </table>";
+  echo "      </tbody>
+      </table>
+    </div>
+  </div>";
 }
 ?>
 
