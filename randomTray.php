@@ -116,7 +116,6 @@ else if ($round == "1") {
   if (isset($_POST["target"])) {
     $target = $_POST["target"];
   }
-  $meal = [];
   $calories = 0;
   $query = "SELECT * FROM Food ORDER BY RAND() LIMIT 1";
   $link = mysqli_connect('localhost', 'smike', 'balloon')
@@ -132,19 +131,23 @@ else if ($round == "1") {
           <th>Calories</th>
         </tr>
       </thead>";
+
   while ($calories < $target) {
     $result = mysqli_query($link, $query) 
               or die('Query failed: ' . mysql_error());
     $tuple = mysqli_fetch_array($result, MYSQL_ASSOC);
 
-    $name = $tuple["name"];
-    $cals = $tuple["Calories"];
-    $calories += $cals;
-
-    echo "<tr>
-      <td>$name</td>
-      <td>$cals</td>
-    </tr>";
+    if ($tuple["Calories"] < ($target - $calories)*1.05 ||
+        $tuple["Calories"] > ($target - $calories)*0.95) {
+      $name = $tuple["name"];
+      $cals = $tuple["Calories"];
+      $calories += $cals;
+    
+      echo "<tr>
+        <td>$name</td>
+        <td>$cals</td>
+      </tr>";
+    }
   }
   echo "  </tbody>
   </table>";
