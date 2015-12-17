@@ -93,7 +93,7 @@ if ($round == "0") {
         <h4>Choose a Calorie Target:</h4>
         <form action=\"randomTray.php\" method=\"post\" class=\"ui form ui form segment\">
           <div class=\"field\">
-            <div class=\"ui selection dropdown\">
+            <div class=\"ui search dropdown\">
               <input type=\"hidden\" name=\"target\">
               <div class=\"default text\">---</div>
               <i class=\"dropdown icon\"></i>
