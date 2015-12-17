@@ -166,7 +166,9 @@ else if ($round == "1") {
 ?>
 
 <script>
-  $('.ui.dropdown').dropdown();
+  $('.ui.dropdown').dropdown({
+    allowAdditions: true
+  });
 
   //For the last dropdowns
   $(".customDropdownSearchTextInput").each(function(){
