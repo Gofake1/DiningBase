@@ -134,8 +134,7 @@ else if ($round == "1") {
             </tr>
           </thead>";
 
-  while (($target - $calories) < $target*1.05 &&
-         ($target - $calories) > $target*0.95) {
+  while (($target - $calories) < $target*1.05) {
     $result = mysqli_query($link, $query) 
               or die('Query failed: ' . mysql_error());
     $tuple = mysqli_fetch_array($result, MYSQL_ASSOC);
@@ -149,6 +148,10 @@ else if ($round == "1") {
         <td>$name</td>
         <td>$cals</td>
       </tr>";
+    }
+
+    if ($calories < $target*1.05 && $calories > $target*0.95) {
+      break;
     }
   }
   echo "      </tbody>
