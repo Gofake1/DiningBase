@@ -105,6 +105,7 @@ if ($round == "0") {
                 <div class=\"item\" data-value=\"700\">700</div>
                 <div class=\"item\" data-value=\"800\">800</div>
                 <div class=\"item\" data-value=\"1000\">1000</div>
+                <div class=\"item\" data-value=\"1500\">1500</div>
                 <div class=\"item\" data-value=\"2000\">2000</div>
               </div>
             </div>
