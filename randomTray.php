@@ -16,6 +16,9 @@
   body {
     background-color: #acd7d0;
   }
+  h3 {
+    margin: auto; /* Horizontal center */
+  }
   .main.container {
     margin-top: 15em;
   }
@@ -122,7 +125,7 @@ else if ($round == "1") {
           or die('Could not connect: ' . mysql_error());
   mysqli_select_db($link, 'smike') or die('Could not select database');
 
-  echo "<br><br>
+  echo "<br><br><br>
   <div class=\"ui grid\">
     <div class=\"six wide centered column\">
       <table class=\"ui celled table\">
@@ -156,7 +159,7 @@ else if ($round == "1") {
   }
   echo "      </tbody>
       </table>
-      <h3>Total: $calories Calories</h4>
+      <h3>Total: $calories Calories</h3>
     </div>
   </div>";
 }
