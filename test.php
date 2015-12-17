@@ -4,7 +4,7 @@ d>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>New Tray</title>
+  <title>Search for Food</title>
   <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
   <link rel="stylesheet" type="text/css" href="main.css">
   <link rel="stylesheet" type="text/css" href="../dist/components/reset.css">
@@ -22,13 +22,12 @@ d>
   <link rel="stylesheet" type="text/css" href="../dist/components/dropdown.css">
   <link rel="stylesheet" type="text/css" href="../dist/components/icon.css">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
-
+  <script src="tablesort.js"></script>
+  
 
   <style type="text/css">
   body {
-    background-color: #e9ece5;
+    background-color: #e3e3e3;
   }
   .main.container {
     margin-top: 15em;
@@ -44,29 +43,31 @@ d>
     margin: 5em 0em 0em;
     padding: 5em 0em;
   }
-  table, th, td{
-        border: 1px solid black;
-        border-collapse: collapse;
+  .ui.raised.segment {
+    margin-left: 4em;
+    margin-right: 4em;
   }
-  table {
-        margin-top: 10em;
-        margin-left: 2em;
+  table, th, td{
+        border:1px;
+	border-collapse: collapse;
+  }
+ 
+  .ui.collapsing.table {
+	margin-top: 8em;
+	margin-left: 1em;
+        margin-right: 6em;
 }
   .query {
-    margin-top: 2em;
-        
-}
-  .ui.dropdown {
-              
-}
-  .ui.fixed.inverted.menu {
-        background-color: #3b3a36;
+	margin-top: 3em;
+	margin-left: 4em;
+	margin-right: 10em;
 }
 
 .ui.button {
-        background-color: #b3c2bf;
+        background-color: #c9c9c9;
 }
 
+  
   </style>
 
 </head>
@@ -81,13 +82,14 @@ d>
       </a>
       <a href="./foods.php" class="item">Search for Food</a>
       <a href="./addRecipe.php" class="item">Create Tray</a>
+      <a href="./randomTray.php" class="item">Feed Me</a>
 <!--      <a href="#" class="ui simple dropdown item">
         Navigate <i class="dropdown icon"></i>
         <div class="menu">
           <div class="item">Add New Recipe</div>
           <div class="item"><a href="./submit.html">Add New Review</a></div>
         </div>
-      </a>
+      </a> 
       <div class="ui dropdown">
         <div class="text">Navigate</div>
         <i class="dropdown icon"></i>
@@ -99,414 +101,322 @@ d>
     </div>
   </div>
 
+<div class="ui grid">
+  <div class="ten wide centered column">
+
 <?php
-
-$round = 0;
-if(isset($_POST["round"])){
- $round=$_POST["round"];
-}
-if( $round == "0" ){
-
-
-echo "<br><br><div class=\"query\">\n";
-echo "<div class=\"ui grid\" ng-controller=\"MainCtrl\">
-<div class=\"six wide centered column\">";
-echo "<form action=\"test.php\" method=\"post\" class=\"ui form ui form segment\">\n";
-echo "<h3>Choose a Dining Hall:</h3>\n\n";
-echo "<div class=\"field\">
-  <div class=\" ui selection dropdown\">
-  <input type=\"hidden\" name=\"DH\">
-  <div class=\"default text\">---</div>
-  <i class=\"dropdown icon\"></i>
-  <div class=\"menu\">
-    <div class=\"item\" data-value=\"North Dining Hall\">NDH</div>
-    <div class=\"item\" data-value=\"South Dining Hall\">SDH</div>
-</div></div></div><br><br>";
-
-/*
-echo "Dining Hall: <select class=\"ui search selection dropdown\" id=\"search-select\">";
-echo "<option value=\"\">---</option>
-<option value=\"North Dining Hall\">NDH</option>
-<option value=\"South Dining Hall\">SDH</option>
-</div><br>"; */
-
-echo "<input type=\"hidden\" name=\"round\" value=\"1\">";
-echo "<input type=\"submit\" value=\"Next Step\" class=\"ui button\">";
-echo "</form>";
-
-
-
-echo "</div>";
-echo "</div></div>";
-}
-
-else if( $round == "1" ){
-if(isset($_POST["DH"])) $DH = $_POST["DH"];
-$query = "SELECT distinct name FROM Food where DiningHall='$DH'";
+//Connecting, selecting database
 $link = mysqli_connect('localhost','smike','balloon')
         or die('Could not connect: ' . mysql_error());
 mysqli_select_db($link, 'smike') or die('Could not select database.');
-$result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
-echo "<br><br><div class=\"query\">\n";
-echo "<div class=\"ui grid\" ng-controller=\"MainCtrl\">
-<div class=\"six wide centered column\">";
-echo "<form action=\"test.php\" method=\"post\" class=\"ui form ui form segment\">";
-echo "<h3>Choose the items you ate:</h3>\n<br>\n";
-echo "Item #1:  <select name=\"item1\" class=\"ui search selection dropdown\">
-<option value=\"\">---</option>\n";
-while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-  $name = $tuple["name"];
-  echo "<option value='$name'>$name</option>";
-}
-echo "</select><br><br><br>\n";
-mysqli_data_seek($result,0);
-echo "Item #2:  <select name=\"item2\" class=\"ui search selection dropdown\">
-<option value=\"\">---</option>\n";
-while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-  $name = $tuple["name"];
-  echo "<option value='$name'>$name</option>";
-}
-echo "</select><br><br><br>\n";
-mysqli_data_seek($result,0);
-echo "Item #3:  <select name=\"item3\" class=\"ui search selection dropdown\">";
-echo "<option value=\"\">---</option>\n";
-while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-  $name = $tuple["name"];
-  echo "<option value='$name'>$name</option>";
-}
-echo "</select><br><br><br>\n";
-mysqli_data_seek($result,0);
-echo "Item #4:  <select name=\"item4\" class=\"ui search selection dropdown\">
-<option value=\"\">---</option>\n";
-while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-  $name = $tuple["name"];
-  echo "<option value='$name'>$name</option>";
-}
-echo "</select><br><br><br>\n";
-mysqli_data_seek($result,0);
-echo "Item #5:  <select name=\"item5\" class=\"ui search selection dropdown\">
-<option value=\"\">---</option>\n";
-while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-  $name = $tuple["name"];
-  echo "<option value='$name'>$name</option>";
-}
-echo "</select><br><br><br>\n";
-mysqli_data_seek($result,0);
-echo "Item #6:  <select name=\"item6\" class=\"ui search selection dropdown\">
-<option value=\"\">---</option>\n";
-while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-  $name = $tuple["name"];
-  echo "<option value='$name'>$name</option>";
-}
-echo "</select><br><br><br>\n";
-mysqli_data_seek($result,0);
-echo "Item #7:  <select name=\"item7\" class=\"ui search selection dropdown\">
-<option value=\"\">---</option>\n";
-while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-  $name = $tuple["name"];
-  echo "<option value='$name'>$name</option>";
-}
-echo "</select><br><br><br>\n";
-mysqli_data_seek($result,0);
-echo "Item #8:  <select name=\"item8\" class=\"ui search selection dropdown\">
-<option value=\"\">---</option>\n";
-while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-  $name = $tuple["name"];
-  echo "<option value='$name'>$name</option>";
-}
-echo "</select><br><br><br>\n";
-mysqli_data_seek($result,0);
-echo "Item #9:  <select name=\"item9\" class=\"ui search selection dropdown\">
-<option value=\"\">---</option>\n";
-while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-  $name = $tuple["name"];
-  echo "<option value='$name'>$name</option>";
-}
-echo "</select><br><br><br>\n";
-mysqli_data_seek($result,0);
-echo "Item #10: <select name=\"item10\" class=\"ui search selection dropdown\">
-<option value=\"\">---</option>\n";
-while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-  $name = $tuple["name"];
-  echo "<option value='$name'>$name</option>";
-}
-echo "</select><br><br><br>\n";
-echo "<input type=\"hidden\" name=\"round\" value=\"2\">";
-echo "<input type=\"hidden\" name=\"DH\" value='$DH'>";
-echo "<input type=\"submit\" value=\"Next Step\" class=\"ui button\">";
-echo "</div></div></div>";
 
+$DH = "";
+$item = "";
+$cal = "";
+$fat = "";
+$pro = "";
+$cbd = "";
+$fib = "";
+$chol = "";
+$sfat = "";
+$sod = "";
+$cal2 = "";
+$fat2 = "";
+$pro2 = "";
+$cbd2 = "";
+$fib2 = "";
+$chol2 = "";
+$sfat2 = "";
+$sod2 = "";
+//Performing SQL query
+if(isset($_POST["DH"]))  $DH=$_POST["DH"];
+if(isset($_POST["item"]))  $item=mysql_real_escape_string($_POST["item"]);
+if(isset($_POST["cal"]))  $cal=$_POST["cal"];
+if(isset($_POST["fat"]))  $fat=$_POST["fat"];
+if(isset($_POST["pro"]))  $pro=$_POST["pro"];
+if(isset($_POST["cbd"]))  $cbd=$_POST["cbd"];
+if(isset($_POST["fib"]))  $fib=$_POST["fib"];
+if(isset($_POST["chol"]))  $chol=$_POST["chol"];
+if(isset($_POST["sfat"]))  $sfat=$_POST["sfat"];
+if(isset($_POST["sod"]))  $sod=$_POST["sod"];
+if(isset($_POST["cal2"]))  $cal2=$_POST["cal2"];
+if(isset($_POST["fat2"]))  $fat2=$_POST["fat2"];
+if(isset($_POST["pro2"]))  $pro2=$_POST["pro2"];
+if(isset($_POST["cbd2"]))  $cbd2=$_POST["cbd2"];
+if(isset($_POST["fib2"]))  $fib2=$_POST["fib2"];
+if(isset($_POST["chol2"]))  $chol2=$_POST["chol2"];
+if(isset($_POST["sfat2"]))  $sfat2=$_POST["sfat2"];
+if(isset($_POST["sod2"]))  $sod2=$_POST["sod2"];
+
+if($DH !="" || $item !="" || $cal !="" || $fat !="" || $pro !="" || $cbd !="" || $fib !="" || $chol !="" || $sfat !="" || $sod !="" || $cal2 !="" || $fat2 !="" || $pro2 !="" || $cbd2 !="" || $fib2 !="" || $chol2 !="" || $sfat2 !="" || $sod2 !=""){
+	$args = 0;
+	$query = 'select * from Food where ';
+	if($DH !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "DiningHall='$DH'";
+		$args = $args + 1;
+	}
+	if($item !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "name like '%$item%'";
+		$args = $args + 1;
+	}
+	if($cal !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "Calories>='$cal'";
+		$args = $args + 1;
+	}
+	if($pro !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "protein>='$pro'";
+		$args = $args + 1;
+	}
+	if($fat !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "fat>='$fat'";
+		$args = $args + 1;
+	}
+	if($cbd !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "carbByDiff>='$cbd'";
+		$args = $args + 1;
+	}
+	if($fib !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "fiber>='$fib'";
+		$args = $args + 1;
+	}
+	if($chol !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "cholesterol>='$chol'";
+		$args = $args + 1;
+	}
+	if($sfat !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "satFat>='$sfat'";
+		$args = $args + 1;
+	}
+	if($sod !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "sodium>='$sod'";
+		$args = $args + 1;
+	}
+	if($cal2 !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "Calories<='$cal2'";
+		$args = $args + 1;
+	}
+	if($pro2 !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "protein<='$pro2'";
+		$args = $args + 1;
+	}
+	if($fat2 !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "fat<='$fat2'";
+		$args = $args + 1;
+	}
+	if($cbd2 !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "carbByDiff<='$cbd2'";
+		$args = $args + 1;
+	}
+	if($fib2 !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "fiber<='$fib2'";
+		$args = $args + 1;
+	}
+	if($chol2 !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "cholesterol<='$chol2'";
+		$args = $args + 1;
+	}
+	if($sfat2 !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "satFat<='$sfat2'";
+		$args = $args + 1;
+	}
+	if($sod2 !=""){
+		if($args>0) $query = $query . " and ";
+		$query = $query . "sodium<='$sod2'";
+		$args = $args + 1;
+	}
+
+} else {
+	$query = 'select * from Food';
+}
+
+
+
+if(isset($_POST["search"])){
+	$result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
+
+	//Printing results in HTML
+echo "<table class=\"ui celled collapsing table\">\n";
+        echo "\t<tr>\n";
+        echo "\t<th class=\"center aligned\">Dining Hall</th>\n";
+        echo "\t<th>Food</th>\n";
+        echo "\t<th>Allergens</th>\n";
+        echo "\t<th>Portion Size</th>\n";
+        echo "\t<th>Calories</th>\n";
+        echo "\t<th>Fat (g)</th>\n";
+        echo "\t<th>Protein (g)</th>\n";
+        echo "\t<th>Carbohydrates (g)</th>\n";
+        echo "\t<th>Fiber (g)</th>\n";
+        echo "\t<th>Cholesterol (mg)</th>\n";
+        echo "\t<th>Saturated Fat (g)</th>\n";
+        echo "\t<th>Sodium (mg)</th>\n";
+        echo "\t</tr>\n";
+while ($tuple = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+        echo "\t<tr>\n";
+//	$netid = $tuple["netID"];
+//	$DH = $tuple["DiningHall"];
+//	$item = $tuple["foodName"];
+//	$rating = $tuple["rating"];
+//	$review = $tuple["comments"];
+        foreach ($tuple as $col_value) {
+                echo "\t\t<td>$col_value</td>\n";
+        }
+//	echo "\t<td><form action=\"deleteReview.php\" method=\"post\"><input type=\"hidden\" name=\"netid\" value=\"$netid\" style=\"test-decoration: none\" /><input type=\"hidden\" name=\"DH\" value=\"$DH\" style=\"test-decoration: none\" /><input type=\"hidden\" name=\"item\" value=\"$item\" style=\"test-decoration: none\" /><input type=\"submit\" value=\"delete\" /></form></td>";
+ 
+//	echo "\t<td><form action=\"update.php\" method=\"post\"><input type=\"hidden\" name=\"netid\" value=\"$netid\" style=\"test-decoration: none\" /><input type=\"hidden\" name=\"DH\" value=\"$DH\" style=\"test-decoration: none\" /><input type=\"hidden\" name=\"item\" value=\"$item\" style=\"test-decoration: none\" /><input type=\"hidden\" name=\"rating\" value=\"$rating\" style=\"test-decoration: none\" /><input type=\"hidden\" name=\"review\" value=\"$review\" style=\"test-decoration: none\" /><input type=\"submit\" value=\"edit\" /></form></td>";
+        echo "\t</tr>\n";
+}
+echo "</table>\n";
+
+//Free resultset
 mysqli_free_result($result);
+
+//Closing connection
 mysqli_close($link);
-}
-
-else if($round = "2"){
-if(isset($_POST["DH"])) $DH = $_POST["DH"];
-if(isset($_POST["item1"])) $item1 = $_POST["item1"];
-if(isset($_POST["item2"])) $item2 = $_POST["item2"];
-if(isset($_POST["item3"])) $item3 = $_POST["item3"];
-if(isset($_POST["item4"])) $item4 = $_POST["item4"];
-if(isset($_POST["item5"])) $item5 = $_POST["item5"];
-if(isset($_POST["item6"])) $item6 = $_POST["item6"];
-if(isset($_POST["item7"])) $item7 = $_POST["item7"];
-if(isset($_POST["item8"])) $item8 = $_POST["item8"];
-if(isset($_POST["item9"])) $item9 = $_POST["item9"];
-if(isset($_POST["item10"])) $item10 = $_POST["item10"];
-
-$link = mysqli_connect('localhost','smike','balloon')
-   or die('Could not connect: ' . mysql_error());
-mysqli_select_db($link, 'smike') or die('Could not select database.');
-
-echo "<br><br><div class=\"query\">\n";
-echo "<div class=\"ui grid\" ng-controller=\"MainCtrl\">
-<div class=\"six wide centered column\">";
-echo "<form action=\"test2.php\" method=\"post\" class=\"ui form ui form segment\">\n";
-echo "<h3>Choose the portion sizes and number of servings:</h3>\n<br>\n";
-if($item1 != ""){
-        $query = "select portionSize from Food where name='$item1' and DiningHall='$DH'";
-        $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
-        echo "<h4>$item1:</h4>
-        portion size:  <select name=\"portion1\" class=\"ui dropdown\">";
-        while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-          $portionSize = $tuple["portionSize"];
-          echo "<option value='$portionSize'>$portionSize</option>";
-        }
-        echo "</select><br>\n";
-        mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve1\" value=\"1\" min=\"0\">";
-        echo "<br><br>";
-}
-
-if($item2 != ""){
-        $query = "select portionSize from Food where name='$item2' and DiningHall='$DH'";
-        $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
-        echo "<h4>$item2:</h4>
-        portion size:  <select name=\"portion2\" class=\"ui dropdown\">";
-        while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-          $portionSize = $tuple["portionSize"];
-          echo "<option value='$portionSize'>$portionSize</option>";
-        }
-        echo "</select><br>\n";
-        mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve2\" value=\"1\" min=\"0\">";
-        echo "<br><br>";
-}
-
-if($item3 != ""){
-        $query = "select portionSize from Food where name='$item3' and DiningHall='$DH'";
-        $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
-        echo "<h4>$item3:</h4>
-        portion size:  <select name=\"portion3\" class=\"ui dropdown\">";
-        while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-          $portionSize = $tuple["portionSize"];
-          echo "<option value='$portionSize'>$portionSize</option>";
-        }
-        echo "</select><br>\n";
-        mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve3\" value=\"1\" min=\"0\">";
-        echo "<br><br>";
-}
-
-if($item4 != ""){
-        $query = "select portionSize from Food where name='$item4' and DiningHall='$DH'";
-        $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
-        echo "<h4>$item4:</h4>
-        portion size:  <select name=\"portion4\" class=\"ui dropdown\">";
-        while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-          $portionSize = $tuple["portionSize"];
-          echo "<option value='$portionSize'>$portionSize</option>";
-        }
-        echo "</select><br>\n";
-        mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve4\" value=\"1\" min=\"0\">";
-        echo "<br><br>";
-}
-
-if($item5 != ""){
-        $query = "select portionSize from Food where name='$item5' and DiningHall='$DH'";
-        $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
-        echo "<h4>$item5:</h4>
-        portion size:  <select name=\"portion5\" class=\"ui dropdown\">";
-        while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-          $portionSize = $tuple["portionSize"];
-          echo "<option value='$portionSize'>$portionSize</option>";
-        }
-        echo "</select><br>\n";
-        mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve5\" value=\"1\" min=\"0\">";
-        echo "<br><br>";
-}
-
-if($item6 != ""){
-        $query = "select portionSize from Food where name='$item6' and DiningHall='$DH'";
-        $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
-        echo "<h4>$item6:</h4>
-        portion size:  <select name=\"portion6\" class=\"ui dropdown\">";
-        while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-          $portionSize = $tuple["portionSize"];
-          echo "<option value='$portionSize'>$portionSize</option>";
-        }
-        echo "</select><br>\n";
-        mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve6\" value=\"1\" min=\"0\">";
-        echo "<br><br>";
-}
-
-if($item7 != ""){
-        $query = "select portionSize from Food where name='$item7' and DiningHall='$DH'";
-        $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
-        echo "<h4>$item7:</h4>
-        portion size:  <select name=\"portion7\" class=\"ui dropdown\">";
-        while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-          $portionSize = $tuple["portionSize"];
-          echo "<option value='$portionSize'>$portionSize</option>";
-        }
-        echo "</select><br>\n";
-        mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve7\" value=\"1\" min=\"0\">";
-        echo "<br><br>";
-}
-
-if($item8 != ""){
-        $query = "select portionSize from Food where name='$item8' and DiningHall='$DH'";
-        $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
-        echo "<h4>$item8:</h4>
-        portion size:  <select name=\"portion8\" class=\"ui dropdown\">";
-        while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-          $portionSize = $tuple["portionSize"];
-          echo "<option value='$portionSize'>$portionSize</option>";
-        }
-        echo "</select><br>\n";
-        mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve8\" value=\"1\" min=\"0\">";
-        echo "<br><br>";
-}
-
-if($item9 != ""){
-        $query = "select portionSize from Food where name='$item9' and DiningHall='$DH'";
-        $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
-        echo "<h4>$item9:</h4>
-        portion size:  <select name=\"portion9\" class=\"ui dropdown\">";
-        while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-          $portionSize = $tuple["portionSize"];
-          echo "<option value='$portionSize'>$portionSize</option>";
-        }
-        echo "</select><br>\n";
-        mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve9\" value=\"1\" min=\"0\">";
-        echo "<br><br>";
-}
-
-if($item10 != ""){
-        $query = "select portionSize from Food where name='$item10' and DiningHall='$DH'";
-        $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
-        echo "<h4>$item10:</h4>
-        portion size:  <select name=\"portion10\" class=\"ui dropdown\">";
-        while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
-          $portionSize = $tuple["portionSize"];
-          echo "<option value='$portionSize'>$portionSize</option>";
-        }
-        echo "</select><br>\n";
-        mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve10\" value=\"1\" min=\"0\">";
-        echo "<br><br>";
-}
-mysqli_close($link);
-echo "<input type=\"hidden\" name=\"DH\" value='$DH'>";
-echo "<input type=\"hidden\" name=\"item1\" value='$item1'>";
-echo "<input type=\"hidden\" name=\"item2\" value='$item2'>";
-echo "<input type=\"hidden\" name=\"item3\" value='$item3'>";
-echo "<input type=\"hidden\" name=\"item4\" value='$item4'>";
-echo "<input type=\"hidden\" name=\"item5\" value='$item5'>";
-echo "<input type=\"hidden\" name=\"item6\" value='$item6'>";
-echo "<input type=\"hidden\" name=\"item7\" value='$item7'>";
-echo "<input type=\"hidden\" name=\"item8\" value='$item8'>";
-echo "<input type=\"hidden\" name=\"item9\" value='$item9'>";
-echo "<input type=\"hidden\" name=\"item10\" value='$item10'>";
-echo "<input type=\"submit\" class = \"ui button\">";
-echo "</div></div></div>";
 }
 ?>
 
+<br><br>
+<div class="query">
+<div class="ui raised segment">
+<h3>Search for specific food items:</h3>
+<br>
+<form action="test.php" method="post" class="ui form">
+<label>Dining Hall</label> 
+<select name="DH" class="ui dropdown">
+  <option value="">---</option>
+  <option value="North Dining Hall">NDH</option>
+  <option value="South Dining Hall">SDH</option>
+</select>
+<div class="field">
+ <label>Item Name</label>
+ <input type="text" name="item">
+</div>
+<h4 class="ui dividing header">Nutritional Content (specify range)</h4>
+<div class="field">
+ <label>Calories</label>
+ <div class="two fields">
+  <div class="field">
+   <input type="number" name="cal" min="0">
+  </div> -- 
+  <div class="field">
+   <input type="number" name="cal2" min="0">
+  </div>
+ </div>
+</div>
+<div class="field">
+ <label>Fat</label>
+ <div class="two fields">
+  <div class="field">
+   <input type="number" name="fat" min="0">
+  </div> --
+  <div class="field">
+   <input type="number" name="fat2" min="0">
+  </div>
+ </div>
+</div>
+<div class="field">
+ <label>Protein</label>
+ <div class="two fields">
+  <div class="field">
+   <input type="number" name="pro" min="0">
+  </div> --
+  <div class="field">
+   <input type="number" name="pro2" min="0">
+  </div>
+ </div>
+</div>
+<div class="field">
+ <label>Carbohydrates</label>
+ <div class="two fields">
+  <div class="field">
+   <input type="number" name="cbd" min="0">
+  </div> --
+  <div class="field">
+   <input type="number" name="cbd2" min="0">
+  </div>
+ </div>
+</div>
+<div class="field">
+ <label>Fiber</label>
+ <div class="two fields">
+  <div class="field">
+   <input type="number" name="fib" min="0">
+  </div> --
+  <div class="field">
+   <input type="number" name="fib2" min="0">
+  </div>
+ </div>
+</div>
+<div class="field">
+ <label>Cholesterol</label>
+ <div class="two fields">
+  <div class="field">
+   <input type="number" name="chol" min="0">
+  </div> --
+  <div class="field">
+   <input type="number" name="chol2" min="0">
+  </div>
+ </div>
+</div>
+<div class="field">
+ <label>Saturated Fat</label>
+ <div class="two fields">
+  <div class="field">
+   <input type="number" name="sfat" min="0">
+  </div> --
+  <div class="field">
+   <input type="number" name="sfat2" min="0">
+  </div>
+ </div>
+</div>
+<div class="field">
+ <label>Sodium</label>
+ <div class="two fields">
+  <div class="field">
+   <input type="number" name="sod" min="0">
+  </div> --
+  <div class="field">
+   <input type="number" name="sod2" min="0">
+  </div>
+ </div>
+</div>
+
+<!--Fat: <input type="number" name="fat"><br>
+Protein: <input type="number" name="pro"><br>
+Carbs by Difference: <input type="number" name="cbd"><br>
+Fiber: <input type="number" name="fib"><br>
+Cholesterol: <input type="number" name="chol"><br>
+Saturated Fat: <input type="number" name="sfat"><br>
+Sodium: <input type="number" name="sod"><br>-->
+<input type="hidden" name="search" value="">
+<input type="submit" class="ui button">
+</form>
+</div>
+</div>
+
 <script>
   $('.ui.dropdown').dropdown();
-
-  //For the last dropdowns
-  $(".customDropdownSearchTextInput").each(function(){
-
-    var defaultText = false;
-    //Get the initial text, i.e. the default text if exists, and not blank
-    //Note this isn't the actual value for form submission, but the displayed value user sees
-    if ( $(this).find(".text").hasClass("default") && $(this).find(".text").text() )
-      defaultText = $(this).find(".text").text();
-
-    //Determine if <select></select> tag is used for semantic ui dropdown, or <div></div> is used instead
-    var isSelectTag = false;
-    if ( $(this).find("input:hidden").length < 1 || $(this).addBack().find( "select" ).length > 0 )
-      isSelectTag = true;
-
-    //This IF statement deals with semantic ui div format of dropdowns
-    if ( isSelectTag == false )
-    {
-      //Semantic UI disable force selection so option isn't auto-selected when user put a letter as input
-      $(this).dropdown(
-      {
-        forceSelection: false
-      });
-
-      /*
-        This is to get rid of the generated active class assigned to selected dropdown options, as it causes problems.
-        Once you selected a select option, and try enter a text value, it would not work due
-        to the active class and a semantic UI event handler. The text would get erased on blur.
-
-        To get past this, there is a need to remove class active on focus BEFORE the onchange event fires.
-
-        Problem is there will be missing CSS due to the removed active class, i.e. bold effect for selected option.
-        Attempted to find the the semantic UI event handler and turn it off, but does not work, thus this approach was taken.
-        There is no perfect solution with transferring CSS from a class found.
-
-        NOTE:
-        There is also the selected class used along with active, which gives the background grey highlight effect to selected div option.
-        This doesn't at current, interfere with entering text input, however in semantic CSS version over 1.12.0+,
-        it just might, thus you may also need to remove the class selected from the div.
-      */
-      $(this).find(".search").on("focus", function(event){
-        var aOpt = $(this).parent().find(".active");
-        aOpt.removeClass("active");
-      });
-
-      //the input with "search" class is the input which user enters text into, but doesn't save any form data, i.e. not submitted
-      //It is auto generated by semantic UI. It should initially be blank.
-      //originalText variable is used to detect if there was any text changes, i.e. same effect to onchange
-      var originalText = $(this).find(".search").text();
-
-      //this refers to the main ui dropdown div
-      $(this).find(".search").on("blur", function(event){
-
-        //this refers to the div with class search, which displays selected option or entered text
-        var text = $(this).val();
-
-        if ( originalText != text )
-        {
-          //If there was a existing default text to start with, and if input was blank
-          if ( $.trim(text)=="" && defaultText != false )
-          {
-            //Set default class for grey css effect, and set the default text
-            $(this).parent().find(".text").addClass("default").removeClass("filtered").text(defaultText);
-          }
-          //Set the hidden input value to whatever new value was entered into input
-          //$(this).parent().find("input:hidden").val(text);
-
-          //originalText= text;
-        }
-
-      });
-    }
-  });
 </script>
 
 </body>
+</div></div>
 
 </html>
-
 
