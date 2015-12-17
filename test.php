@@ -1,5 +1,4 @@
-<html>
-<head>
+d>
   <!-- Standard Meta -->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -8,6 +7,20 @@
   <title>New Tray</title>
   <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
   <link rel="stylesheet" type="text/css" href="main.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/reset.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/site.css">
+
+  <link rel="stylesheet" type="text/css" href="../dist/components/container.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/grid.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/header.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/image.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/menu.css">
+
+  <link rel="stylesheet" type="text/css" href="../dist/components/divider.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/list.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/segment.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/dropdown.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/icon.css">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
@@ -15,7 +28,7 @@
 
   <style type="text/css">
   body {
-    background-color: #e9ece5;
+    background-color: #f2efe8;
   }
   .main.container {
     margin-top: 15em;
@@ -32,31 +45,24 @@
     padding: 5em 0em;
   }
   table, th, td{
-    border: 1px solid black;
-    border-collapse: collapse;
+        border: 1px solid black;
+        border-collapse: collapse;
   }
   table {
-    margin-top: 10em;
-    margin-left: 2em;
-  }
+        margin-top: 10em;
+        margin-left: 2em;
+}
   .query {
-    margin-top: 2em;
-    margin-left: 2em;
-}
-  .ui.dropdown {
-              
-}
-  .ui.fixed.inverted.menu {
-        background-color: #3b3a36;
-}
-
-.ui.button {
-        background-color: #b3c2bf;
+        margin-top: 3em;
+        margin-left: 2em;
 }
   .ui.raised.segment {
-    padding: 5em 5em 5em 5em;
-  }
-</style>
+        padding: 5em 5em 5em 5em;
+}
+  .ui.fixed.inverted.menu {
+        background-color: #b0aac2;
+}
+  </style>
 
 </head>
 
@@ -70,8 +76,7 @@
       </a>
       <a href="./foods.php" class="item">Search for Food</a>
       <a href="./addRecipe.php" class="item">Create Tray</a>
-      <a href="./randomTray.php" class="item">Feed Me</a>
-      <!--<a href="#" class="ui simple dropdown item">
+<!--      <a href="#" class="ui simple dropdown item">
         Navigate <i class="dropdown icon"></i>
         <div class="menu">
           <div class="item">Add New Recipe</div>
@@ -100,9 +105,9 @@ if( $round == "0" ){
 
 echo "<br><br><div class=\"query\">\n";
 echo "<div class=\"ui grid\" ng-controller=\"MainCtrl\">
-<div class=\"six wide centered column\">";
-echo "<form action=\"addRecipe.php\" method=\"post\" class=\"ui form ui form segment\">\n";
-echo "<h3 class=\"ui dividing header\">Choose a Dining Hall:</h3>\n\n";
+<div class=\"eight wide centered column\">";
+echo "<h4>Choose a Dining Hall:</h4>\n";
+echo "<form action=\"test.php\" method=\"post\" class=\"ui form ui form segment\">\n";
 echo "<div class=\"field\">
   <div class=\" ui selection dropdown\">
   <input type=\"hidden\" name=\"DH\">
@@ -139,9 +144,9 @@ mysqli_select_db($link, 'smike') or die('Could not select database.');
 $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
 echo "<br><br><div class=\"query\">\n";
 echo "<div class=\"ui grid\" ng-controller=\"MainCtrl\">
-<div class=\"six wide centered column\">";
-echo "<form action=\"addRecipe.php\" method=\"post\" class=\"ui form ui form segment\">";
-echo "<h3 class=\"ui dividing header\">Choose the items you ate:</h3>\n<br>\n";
+<div class=\"eight wide centered column\">";
+echo "<h3>Choose the items you ate:</h3>\n<br>\n";
+echo "<form action=\"test.php\" method=\"post\" class=\"ui form ui form segment\">";
 echo "Item #1:  <select name=\"item1\" class=\"ui search selection dropdown\">
 <option value=\"\">---</option>\n";
 while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
@@ -232,18 +237,16 @@ mysqli_close($link);
 
 else if($round = "2"){
 if(isset($_POST["DH"])) $DH = $_POST["DH"];
-$link = mysqli_connect('localhost','smike','balloon')
-        or die('Could not connect: ' . mysql_error());
-if(isset($_POST["item1"])) $item1 = mysqli_real_escape_string($link, $_POST["item1"]);
-if(isset($_POST["item2"])) $item2 = mysqli_real_escape_string($link, $_POST["item2"]);
-if(isset($_POST["item3"])) $item3 = mysqli_real_escape_string($link, $_POST["item3"]);
-if(isset($_POST["item4"])) $item4 = mysqli_real_escape_string($link, $_POST["item4"]);
-if(isset($_POST["item5"])) $item5 = mysqli_real_escape_string($link, $_POST["item5"]);
-if(isset($_POST["item6"])) $item6 = mysqli_real_escape_string($link, $_POST["item6"]);
-if(isset($_POST["item7"])) $item7 = mysqli_real_escape_string($link, $_POST["item7"]);
-if(isset($_POST["item8"])) $item8 = mysqli_real_escape_string($link, $_POST["item8"]);
-if(isset($_POST["item9"])) $item9 = mysqli_real_escape_string($link, $_POST["item9"]);
-if(isset($_POST["item10"])) $item10 = mysqli_real_escape_string($link, $_POST["item10"]);
+if(isset($_POST["item1"])) $item1 = $_POST["item1"];
+if(isset($_POST["item2"])) $item2 = $_POST["item2"];
+if(isset($_POST["item3"])) $item3 = $_POST["item3"];
+if(isset($_POST["item4"])) $item4 = $_POST["item4"];
+if(isset($_POST["item5"])) $item5 = $_POST["item5"];
+if(isset($_POST["item6"])) $item6 = $_POST["item6"];
+if(isset($_POST["item7"])) $item7 = $_POST["item7"];
+if(isset($_POST["item8"])) $item8 = $_POST["item8"];
+if(isset($_POST["item9"])) $item9 = $_POST["item9"];
+if(isset($_POST["item10"])) $item10 = $_POST["item10"];
 
 $link = mysqli_connect('localhost','smike','balloon')
    or die('Could not connect: ' . mysql_error());
@@ -251,9 +254,9 @@ mysqli_select_db($link, 'smike') or die('Could not select database.');
 
 echo "<br><br><div class=\"query\">\n";
 echo "<div class=\"ui grid\" ng-controller=\"MainCtrl\">
-<div class=\"six wide centered column\">";
+<div class=\"eight wide centered column\">";
+echo "<h3>Choose the portion sizes and number of servings:</h3>\n<br>\n";
 echo "<form action=\"recipeResults.php\" method=\"post\" class=\"ui form ui form segment\">\n";
-echo "<h3 class=\"ui dividing header\">Choose the portion sizes and number of servings:</h3>\n<br>\n";
 if($item1 != ""){
         $query = "select portionSize from Food where name='$item1' and DiningHall='$DH'";
         $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
@@ -265,7 +268,7 @@ if($item1 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve1\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve1\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -280,7 +283,7 @@ if($item2 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve2\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve2\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -295,7 +298,7 @@ if($item3 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve3\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve3\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -310,7 +313,7 @@ if($item4 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve4\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve4\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -325,7 +328,7 @@ if($item5 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve5\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve5\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -340,7 +343,7 @@ if($item6 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve6\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve6\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -355,7 +358,7 @@ if($item7 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve7\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve7\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -370,7 +373,7 @@ if($item8 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve8\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve8\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -385,7 +388,7 @@ if($item9 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve9\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve9\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 
@@ -400,7 +403,7 @@ if($item10 != ""){
         }
         echo "</select><br>\n";
         mysqli_free_result($result);
-        echo "servings:  <input type=\"number\" name=\"serve10\" value=\"1\" min=\"0\" step=\"0.1\">";
+        echo "servings:  <input type=\"number\" name=\"serve10\" value=\"1\" min=\"0\">";
         echo "<br><br>";
 }
 mysqli_close($link);
@@ -438,7 +441,7 @@ echo "</div></div></div>";
       isSelectTag = true;
 
     //This IF statement deals with semantic ui div format of dropdowns
-    if ( isSelectTag === false )
+    if ( isSelectTag == false )
     {
       //Semantic UI disable force selection so option isn't auto-selected when user put a letter as input
       $(this).dropdown(
@@ -481,7 +484,7 @@ echo "</div></div></div>";
         if ( originalText != text )
         {
           //If there was a existing default text to start with, and if input was blank
-          if ( $.trim(text)==="" && defaultText !== false )
+          if ( $.trim(text)=="" && defaultText != false )
           {
             //Set default class for grey css effect, and set the default text
             $(this).parent().find(".text").addClass("default").removeClass("filtered").text(defaultText);
@@ -500,4 +503,5 @@ echo "</div></div></div>";
 </body>
 
 </html>
+
 
