@@ -127,7 +127,11 @@ else if ($round == "1") {
 
   echo "<br><br>
   <table class=\"ui celled table\">
-    <tbody>";
+    <tbody>
+      <thead>
+        <tr>Name</tr>
+        <tr>Calories</tr>
+      </thead>";
   while ($tuple = mysqli_fetch_array($result, MYSQL_ASSOC)) {
     $name = $tuple["name"];
     $cals = $tuple["Calories"];
