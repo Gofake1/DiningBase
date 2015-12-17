@@ -17,7 +17,7 @@
     background-color: #acd7d0;
   }
   h3 {
-    margin: auto; /* Horizontal center */
+    text-align: center;
   }
   .main.container {
     margin-top: 15em;
