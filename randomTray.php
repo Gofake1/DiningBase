@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Review Processing</title>
+  <title>Feed Me</title>
   <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
   <link rel="stylesheet" type="text/css" href="main.css">
 
@@ -121,7 +121,7 @@ else if ($round == "1") {
   $query = "SELECT * FROM Food ORDER BY RAND() LIMIT 1";
   $link = mysqli_connect('localhost', 'smike', 'balloon')
           or die('Could not connect: ' . mysql_error());
-  mysql_select_db($link, 'smike') or die('Could not select database');
+  mysqli_select_db($link, 'smike') or die('Could not select database');
   $result = mysqli_query($link, $query) 
             or die('Query failed: ' . mysql_error());
   echo "$result";
