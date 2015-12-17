@@ -23,6 +23,12 @@
   <link rel="stylesheet" type="text/css" href="../dist/components/dropdown.css">
   <link rel="stylesheet" type="text/css" href="../dist/components/icon.css">
   
+  <script>
+    $('.ui.fluid.search.selection.dropdown').dropdown();
+    $(#'DHsel')
+      .dropdown()
+    ;
+  </script>
 
   <style type="text/css">
   body {
@@ -100,14 +106,18 @@ if( $round == "0" ){
 echo "<br><br><div class=\"query\">\n";
 echo "<div class=\"ui rasied segment\">";
 echo "<h3>Choose a Dining Hall:</h3>\n<br>\n";
-echo "<form action=\"addRecipe.php\" method=\"post\" class=\"ui form\">\n";
-echo "Dining Hall: <select name=\"DH\" class=\"ui dropdown\">
-<option value=\"\">---</option>
-<option value=\"North Dining Hall\">NDH</option>
-<option value=\"South Dining Hall\">SDH</option>
-</select><br>\n";
+echo "<form action=\"test.php\" method=\"post\" class=\"ui form\" id=\"DHsel\">\n";
+echo "Dining Hall: <div class=\"ui fluid search selection dropdown\">
+<input name=\"DH\" type=\"hidden\">
+<i class=\"dropdown icon\"></i>";
+echo "<div class=\"default text\">---</div>
+<div class=\"menu\">
+<div class=\"item\" data-value=\"North Dining Hall\">NDH</div>
+<div class=\"item\" data-value=\"South Dining Hall\">SDH</div>
+</div></div><br>\n";
 echo "<input type=\"hidden\" name=\"round\" value=\"1\">";
 echo "<input type=\"submit\" value=\"Next Step\" class=\"ui button\">";
+//echo "</div>";
 echo "</div>";
 echo "</div>";
 }
@@ -122,7 +132,7 @@ $result = mysqli_query($link,$query) or die('Query failed: ' . mysql_error());
 echo "<br><br><div class=\"query\">\n";
 echo "<h3>Choose the items you ate:</h3>\n<br>\n";
 echo "<form action=\"addRecipe.php\" method=\"post\" class=\"ui form\">";
-echo "Item #1: <select name=\"item1\" class=\"ui dropdown\">
+echo "Item #1: <select name=\"item1\" class=\"ui fluid search selection dropdown\">
 <option value=\"\">---</option>\n";
 while($tuple = mysqli_fetch_array($result,MYSQL_ASSOC)){
   $name = $tuple["name"];
