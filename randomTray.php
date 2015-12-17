@@ -74,10 +74,26 @@ if (isset($_POST["round"])) {
   $round = $_POST["round"];
 }
 if ($round == "0") {
-  echo "<br><br><div class=\"query\">\n";
-  echo "<div class=\"ui grid\" ng-controller=\"MainCtrl\">
-  <div class=\"eight wide centered column\">";
-  echo "<h4>Choose a Calorie Target:</h4>\n";
+  echo "<br><br>
+  <div class=\"query\">
+    <div class=\"ui grid\" ng-controller=\"MainCtrl\">
+      <div class=\"eight wide centered column\">
+        <h4>Choose a Calorie Target:</h4>
+        <form action=\"randomTray.php\" method=\"post\" class=\"ui form ui form segment\">
+          <div class=\"field\">
+            <div class=\"ui selection dropdown\">
+              <input type=\"hidden\" name=\"DH\">
+              <div class=\"default text\">---</div>
+              <i class=\"dropdown icon\"></i>
+              <div class=\"menu\">
+                <div class=\"item\" data-value=\"North Dining Hall\">NDH</div>
+                <div class=\"item\" data-value=\"South Dining Hall\">SDH</div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>";
 }
 ?>
 
