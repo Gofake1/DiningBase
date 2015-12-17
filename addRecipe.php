@@ -52,14 +52,14 @@
   table {
         margin-top: 10em;
         margin-left: 2em;
-}
+  }
   .query {
         margin-top: 3em;
         margin-left: 2em;
-}
+  }
   .ui.raised.segment {
         padding: 5em 5em 5em 5em;
-}
+  }
   </style>
 
 </head>
@@ -435,7 +435,7 @@ echo "</div>";
       isSelectTag = true;
 
     //This IF statement deals with semantic ui div format of dropdowns
-    if ( isSelectTag == false )
+    if ( isSelectTag === false )
     {
       //Semantic UI disable force selection so option isn't auto-selected when user put a letter as input
       $(this).dropdown(
@@ -478,7 +478,7 @@ echo "</div>";
         if ( originalText != text )
         {
           //If there was a existing default text to start with, and if input was blank
-          if ( $.trim(text)=="" && defaultText != false )
+          if ( $.trim(text)==="" && defaultText !== false )
           {
             //Set default class for grey css effect, and set the default text
             $(this).parent().find(".text").addClass("default").removeClass("filtered").text(defaultText);

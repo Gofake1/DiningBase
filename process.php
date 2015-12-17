@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Review Processesing</title>
+  <title>Review Processing</title>
   <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
   <link rel="stylesheet" type="text/css" href="main.css">
   <link rel="stylesheet" type="text/css" href="../dist/components/reset.css">
@@ -27,7 +27,7 @@
   <style type="text/css">
   body {
     background-color: #FFFFFF;
-    margin-top: 3em;	
+    margin-top: 3em;  
     margin-left: 2em;
   }
   .main.container {
@@ -45,13 +45,13 @@
     padding: 5em 0em;
   }
   table, th, td{
-	border: 1px solid black;
-	border-collapse: collapse;
+    border: 1px solid black;
+    border-collapse: collapse;
   }
   table {
-	margin-top: 3em;
-	margin-left: 2em;
-}
+    margin-top: 3em;
+    margin-left: 2em;
+  }
   </style>
 
 </head>
@@ -85,24 +85,24 @@ $DH=$_POST["DH"];
 $item=$_POST["item"];
 $rating=$_POST["rating"];
 if(isset($_POST["review"])){
-	$review=$_POST["review"];
+  $review=$_POST["review"];
 } else{
-	$review="";
+  $review="";
 }
 $insert = "insert into Review values ('$netid','$DH','$item',$rating,'$review')";
 if (mysqli_query($link,$insert)){
-	echo "New review created successfully. ";
-	echo "Redirecting to reviews page.";
-	//Closing connection
-	mysqli_close($link);
-	$host = $_SERVER['HTTP_HOST'];
-	$uri = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-	$page = 'reviews.php';
+  echo "New review created successfully. ";
+  echo "Redirecting to reviews page.";
+  //Closing connection
+  mysqli_close($link);
+  $host = $_SERVER['HTTP_HOST'];
+  $uri = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+  $page = 'reviews.php';
 
-	header("Refresh: 5; URL=http://$host$uri/$page");
+  header("Refresh: 5; URL=http://$host$uri/$page");
 }
 else{
-	echo "Error: " . $insert . "<br>" . mysqli_error($link);
+  echo "Error: " . $insert . "<br>" . mysqli_error($link);
 } 
 
 ?>
