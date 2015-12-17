@@ -14,7 +14,7 @@
 
   <style type="text/css">
   body {
-    background-color: #acd7d0;
+    background-color: #e3e3e3;
   }
   h3 {
     text-align: center;
@@ -48,6 +48,11 @@
   .ui.raised.segment {
     padding: 5em 5em 5em 5em;
   }
+
+  .ui.button {
+        background-color: #c9c9c9;
+}
+
   </style>
 
 </head>
