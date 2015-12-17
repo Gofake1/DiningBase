@@ -91,14 +91,14 @@ if ($round == "0") {
         <form action=\"randomTray.php\" method=\"post\" class=\"ui form ui form segment\">
           <div class=\"field\">
             <div class=\"ui selection dropdown\">
-              <input type=\"hidden\" name=\"DH\">
+              <input type=\"hidden\" name=\"target\">
               <div class=\"default text\">---</div>
               <i class=\"dropdown icon\"></i>
               <div class=\"menu\">
                 <div class=\"item\" data-value=\"300\">300</div>
                 <div class=\"item\" data-value=\"400\">400</div>
                 <div class=\"item\" data-value=\"500\">500</div>
-                <div class=\"item\" data-value=\"600\">400</div>
+                <div class=\"item\" data-value=\"600\">600</div>
                 <div class=\"item\" data-value=\"700\">700</div>
               </div>
             </div>
@@ -113,7 +113,10 @@ if ($round == "0") {
 }
 
 else if ($round == "1") {
-  echo "Hello world";
+  if (isset($_POST["target"])) {
+    $target = $_POST["target"];
+  }
+  echo "'$target'";
 }
 ?>
 
