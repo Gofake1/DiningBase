@@ -220,6 +220,8 @@ mysqli_close($link);
 
 else if($round = "2"){
 if(isset($_POST["DH"])) $DH = $_POST["DH"];
+$link = mysqli_connect('localhost','smike','balloon')
+        or die('Could not connect: ' . mysql_error());
 if(isset($_POST["item1"])) $item1 = mysqli_real_escape_string($link, $_POST["item1"]);
 if(isset($_POST["item2"])) $item2 = mysqli_real_escape_string($link, $_POST["item2"]);
 if(isset($_POST["item3"])) $item3 = mysqli_real_escape_string($link, $_POST["item3"]);
